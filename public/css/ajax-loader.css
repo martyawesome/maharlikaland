@@ -1,0 +1,127 @@
+.cssload-loader {
+	width: 225px;
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+	position: fixed;
+	left: 50%;
+	top:40%;
+	z-index: 1;
+	transform: translate(-50%, -50%);
+		-o-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		-webkit-transform: translate(-50%, -50%);
+		-moz-transform: translate(-50%, -50%);
+	font-family: helvetica, arial, sans-serif;
+	text-transform: uppercase;
+	font-weight: 900;
+	font-size:16px;
+	color: rgb(0,141,76);
+	letter-spacing: 0.2em;
+}
+.cssload-loader::before, .cssload-loader::after {
+	content: "";
+	display: block;
+	width: 13px;
+	height: 13px;
+	background: rgb(0,141,76);
+	position: absolute;
+	animation: cssload-load 0.91s infinite alternate ease-in-out;
+		-o-animation: cssload-load 0.91s infinite alternate ease-in-out;
+		-ms-animation: cssload-load 0.91s infinite alternate ease-in-out;
+		-webkit-animation: cssload-load 0.91s infinite alternate ease-in-out;
+		-moz-animation: cssload-load 0.91s infinite alternate ease-in-out;
+}
+.cssload-loader::before {
+	top: 0;
+}
+.cssload-loader::after {
+	bottom: 0;
+}
+
+
+
+@keyframes cssload-load {
+	0% {
+		left: 0;
+		height: 27px;
+		width: 13px;
+	}
+	50% {
+		height: 7px;
+		width: 36px;
+	}
+	100% {
+		left: 211px;
+		height: 27px;
+		width: 13px;
+	}
+}
+
+@-o-keyframes cssload-load {
+	0% {
+		left: 0;
+		height: 27px;
+		width: 13px;
+	}
+	50% {
+		height: 7px;
+		width: 36px;
+	}
+	100% {
+		left: 211px;
+		height: 27px;
+		width: 13px;
+	}
+}
+
+@-ms-keyframes cssload-load {
+	0% {
+		left: 0;
+		height: 27px;
+		width: 13px;
+	}
+	50% {
+		height: 7px;
+		width: 36px;
+	}
+	100% {
+		left: 211px;
+		height: 27px;
+		width: 13px;
+	}
+}
+
+@-webkit-keyframes cssload-load {
+	0% {
+		left: 0;
+		height: 27px;
+		width: 13px;
+	}
+	50% {
+		height: 7px;
+		width: 36px;
+	}
+	100% {
+		left: 211px;
+		height: 27px;
+		width: 13px;
+	}
+}
+
+@-moz-keyframes cssload-load {
+	0% {
+		left: 0;
+		height: 27px;
+		width: 13px;
+	}
+	50% {
+		height: 7px;
+		width: 36px;
+	}
+	100% {
+		left: 211px;
+		height: 27px;
+		width: 13px;
+	}
+}

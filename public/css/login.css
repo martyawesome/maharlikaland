@@ -1,0 +1,56 @@
+
+.login-logo {
+	font-size: 6em;
+	color: #008d03;
+}
+
+.login-logo-secondary {
+	color: #008d03;
+	font-weight: 400;
+}
+
+.login-logo-small {
+	font-size: 2em;
+	color: #008d03;
+	top: -20px;
+	position: relative;
+}
+
+
+.login-box {
+	position:absolute;
+	top:50%;
+	left:50%;
+	-ms-transform: translateX(-50%) translateY(-70%);
+	-webkit-transform: translate(-50%,-70%);
+	transform: translate(-50%,-70%);
+}
+
+
+@media screen and (max-width: 980px) {
+	.login-logo {
+		font-size: 3em;
+	}
+}
+
+.forgot-password {
+	position: relative;
+	top: 30px;
+	color: #fe7902;
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+input:-webkit-autofill, 
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: inherit !important;
+  -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
