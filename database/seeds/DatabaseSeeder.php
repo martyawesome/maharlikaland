@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(PenaltyTypeTableSeeder::class);
-        
-        /*$this->call(MediaTypesTableSeeder::class);
+        $this->call(MainAdminTableSeeder::class);
+        /*$this->call(PenaltyTypeTableSeeder::class);
+        $this->call(MediaTypesTableSeeder::class);
         $this->call(NumberOfBathroomsTableSeeder::class);
         $this->call(NumberOfBedroomsTableSeeder::class);
         $this->call(ParkingAvailabilityTableSeeder::class);
@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserTypesTableSeeder::class);
         $this->call(FloorsTableSeeder::class);
         $this->call(PaymentTypesTableSeeder::class);
-        $this->call(MainAdminTableSeeder::class);
         $this->call(ParkingAvailabilityTableSeeder::class);
         $this->call(PayrollAdditionTypesTableSeeder::class);
         $this->call(PayrollDeductionTypesTableSeeder::class);*/

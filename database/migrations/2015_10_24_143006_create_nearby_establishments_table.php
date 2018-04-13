@@ -12,13 +12,13 @@ class CreateNearbyEstablishmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('nearby_establishments', function (Blueprint $table) {
+        /*Schema::create('nearby_establishments', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('project_id');
             $table->string('nearby_establishment',50);
             $table->string('slug');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateNearbyEstablishmentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('nearby_establishments');
+        //Schema::drop('nearby_establishments');
     }
 }

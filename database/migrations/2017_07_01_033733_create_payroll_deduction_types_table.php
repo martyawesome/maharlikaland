@@ -12,12 +12,11 @@ class CreatePayrollDeductionTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('payroll_deduction_types', function (Blueprint $table) {
+        /*Schema::create('payroll_deduction_types', function (Blueprint $table) {
             $table->increments('id')->index();
-            $table->integer('developer_id');
             $table->string('type', 20);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +26,6 @@ class CreatePayrollDeductionTypesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('payroll_deduction_types');
+        //Schema::drop('payroll_deduction_types');
     }
 }

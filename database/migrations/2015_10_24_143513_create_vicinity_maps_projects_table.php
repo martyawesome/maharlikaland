@@ -12,12 +12,12 @@ class CreateVicinityMapsProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('vicinity_maps_projects', function (Blueprint $table) {
+        /*Schema::create('vicinity_maps_projects', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('project_id');
             $table->string('image_path');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +27,6 @@ class CreateVicinityMapsProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('vicinity_maps_projects');
+        //Schema::drop('vicinity_maps_projects');
     }
 }

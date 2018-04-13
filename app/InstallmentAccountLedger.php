@@ -398,7 +398,6 @@ class InstallmentAccountLedger extends Model
     public static function getCurrentDueDates()
     {
         $current_day = (int)(date('d'));
-        $developer = Developer::getCurrentDeveloper();
 
         return InstallmentAccountLedger::leftJoin(DB::raw('(select installment_account_ledger_id, sum(amount_paid) as total_amount_paid from installment_account_ledger_details where payment_type_id = '.config('constants.PAYMENT_TYPE_MA') .' group by installment_account_ledger_id) as ap'),'ap.installment_account_ledger_id','=','installment_account_ledger.id')
         ->leftJoin(DB::raw('(select installment_account_ledger_id, sum(amount_paid) as total_reservation from installment_account_ledger_details where payment_type_id = '.config('constants.PAYMENT_TYPE_RESERVATION_FEE') .' group by installment_account_ledger_id) as r'),'r.installment_account_ledger_id','=','installment_account_ledger.id')
@@ -407,7 +406,7 @@ class InstallmentAccountLedger extends Model
         ->leftJoin('projects','projects.id','=','properties.project_id')
         ->leftJoin('buyers','buyers.id','=','installment_account_ledger.buyer_id')
         ->select(DB::raw('properties.name as property, properties.slug as property_slug, projects.name as project, projects.slug as project_slug, installment_account_ledger.*'))
-        ->whereRaw(DB::raw('installment_account_ledger.due_date = '.$current_day.' and projects.developer_id = '.$developer->id.' and ((IFNULL(total_amount_paid,0) > 0 and installment_account_ledger.balance > IFNULL(total_amount_paid,0)) or (IFNULL(total_reservation,0) + IFNULL(total_dp,0) >= installment_account_ledger.dp))'))
+        ->whereRaw(DB::raw('installment_account_ledger.due_date = '.$current_day.' and ((IFNULL(total_amount_paid,0) > 0 and installment_account_ledger.balance > IFNULL(total_amount_paid,0)) or (IFNULL(total_reservation,0) + IFNULL(total_dp,0) >= installment_account_ledger.dp))'))
         ->get();
     }
 

@@ -12,11 +12,11 @@ class CreateFloorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('floors', function (Blueprint $table) {
+        /*Schema::create('floors', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('floor');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -26,6 +26,6 @@ class CreateFloorsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('floors');
+        //Schema::drop('floors');
     }
 }

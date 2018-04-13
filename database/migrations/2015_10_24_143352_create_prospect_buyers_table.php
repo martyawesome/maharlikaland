@@ -12,7 +12,7 @@ class CreateProspectBuyersTable extends Migration
      */
     public function up()
     {
-        Schema::create('prospect_buyers', function (Blueprint $table) {
+        /*Schema::create('prospect_buyers', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('first_name',30);
             $table->string('middle_name',30);
@@ -21,10 +21,9 @@ class CreateProspectBuyersTable extends Migration
             $table->string('address',30);
             $table->string('contact_number', 15);
             $table->string('email',50);
-            $table->integer('developer_id')->nullable();
             $table->integer('agent_id')->nullable();
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -34,6 +33,6 @@ class CreateProspectBuyersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('prospect_buyers');
+        //Schema::drop('prospect_buyers');
     }
 }

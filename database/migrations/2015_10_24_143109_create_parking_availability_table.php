@@ -12,11 +12,11 @@ class CreateParkingAvailabilityTable extends Migration
      */
     public function up()
     {
-        Schema::create('parking_availability', function (Blueprint $table) {
+        /*Schema::create('parking_availability', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('parking_availability',50);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -26,6 +26,6 @@ class CreateParkingAvailabilityTable extends Migration
      */
     public function down()
     {
-        Schema::drop('parking_availability');
+        //Schema::drop('parking_availability');
     }
 }

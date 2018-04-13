@@ -55,13 +55,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public static function hasDeveloperAccess() {
         $user = Auth::user();
-        $developer = Developer::find($user->developer_id);
         if(Auth::user()->is_admin_activated and 
             (Auth::user()->user_type_id == config('constants.USER_TYPE_ADMIN')
                 or config('constants.USER_TYPE_DEVELOPER_ADMIN')
                 or config('constants.USER_TYPE_DEVELOPER_SECRETARY')
-                or config('constants.USER_TYPE_DEVELOPER_ACCOUNTANT')
-                or $developer)) {
+                or config('constants.USER_TYPE_DEVELOPER_ACCOUNTANT'))) {
             return true;
         } else {
             return false;
@@ -113,14 +111,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     * Get the users of a developer.
     *
     */
-    public static function getUsersOfDeveloper($user_id, $developer_id)
+    public static function getUsersOfDeveloper($user_id)
     {
         return User::selectRaw(DB::raw('users.*, user_types.user_type'))
         ->leftJoin('user_types','user_types.id','=','users.user_type_id')
-        ->leftJoin('developers_buyers','developers_buyers.buyer_id','=','users.buyer_id')
-        ->leftJoin('developers_agents','developers_agents.user_id','=','users.id')
-        ->whereRaw(DB::raw('(users.developer_id = '.$developer_id.' or developers_buyers.developer_id = '.$developer_id.' 
-            or developers_agents.developer_id = '.$developer_id.') and users.id != '.$user_id))
+        ->whereRaw(DB::raw('users.id != '.$user_id))
         ->get();
     }
 
@@ -128,13 +123,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     * Get the users of a developer.
     *
     */
-    public static function getAllForForm($developer_id)
+    public static function getAllForForm()
     {
         return User::selectRaw(DB::raw("CONCAT(last_name,', ',first_name) as full_name, users.id"))
-        ->leftJoin('developers_buyers','developers_buyers.buyer_id','=','users.buyer_id')
-        ->leftJoin('developers_agents','developers_agents.user_id','=','users.id')
-        ->whereRaw(DB::raw('(users.developer_id = '.$developer_id.' or developers_buyers.developer_id = '.$developer_id.' 
-            or developers_agents.developer_id = '.$developer_id.')'))
         ->orderBy('full_name','asc')
         ->lists('full_name','id');
     }
@@ -156,10 +147,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     * Get the Admin- Developer accounts of a developer.
     *
     */
-    public static function getAdminsOfDeveloper($developer_id)
+    public static function getAdminsOfDeveloper()
     {
         return User::whereRaw(DB::raw('users.user_type_id = '.config('constants.USER_TYPE_DEVELOPER_ADMIN')))
-        ->whereRaw(DB::raw('users.developer_id = '.$developer_id))
         ->get();
     }
 
@@ -233,14 +223,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $return["success"] = $user->touch();        
         
         if($return["success"]){
-            if($request->get('user_type') == config('constants.USER_TYPE_BROKER') or
-            $request->get('user_type') == config('constants.USER_TYPE_SALESPERSON')) {
-                $dev_agent["success"] = DeveloperAgent::addAgentToDeveloper(Auth::user()->developer_id, $user->id);
-                if($return["success"] == 1) {
-                    $return["success"] = true;
+            if($request->get('user_type') == config('constants.USER_TYPE_BROKER')
+                or $request->get('user_type') == config('constants.USER_TYPE_SALESPERSON')) {
+                if($return["success"]) {
                     DB::commit();
                 } else {
-                    $return["success"] = false;
                     DB::rollback();
                 }
             } else {
@@ -422,7 +409,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
          extract(day from birthdate) as birthday, user_types.user_type'))
         ->leftJoin('user_types','user_types.id','=','users.user_type_id')
             ->whereRaw('extract(month from birthdate) = ?', [(int)(date('m'))])
-            ->whereRaw('users.developer_id = '.$developer->id)
             ->orderBy('birthday','asc')
             ->get();
     }
@@ -433,15 +419,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public static function getByWholeName($first_name, $middle_name, $last_name)
     {
-        $developer = Developer::getCurrentDeveloper();
         if($middle_name != null) {
             return User::whereRaw("first_name like '%".$first_name."%' and middle_name like
-             '%".$middle_name."%' and last_name like '%".$last_name."%' and developer_id
-              = ".$developer->id)->first();
+             '%".$middle_name."%' and last_name like '%".$last_name."%'")->first();
         } else {
             return User::whereRaw("first_name like '%".$first_name."%' and
-             last_name like '%".$last_name."%' and developer_id
-              = ".$developer->id)->first();
+             last_name like '%".$last_name."%'")->first();
         }
     }
 
@@ -476,11 +459,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                     $user->contact_number = $datum->contact_number;
                     $user->email = $datum->email;
                     $user->user_type_id = $datum->user_type;
-                    if($developer){
-                        $user->developer_id = $developer->id;
-                    }
                     $id = User::orderBy('id','desc')->first()->id + 1;
-                    $user->username = ucwords(trim(str_replace(' ', '', str_replace('Ñ', 'n', str_replace('ñ', 'n', strtolower($datum->last_name)))))).$id;
+                    $user->username = strtolower(trim(str_replace(' ', '', str_replace('Ñ', 'n', str_replace('ñ', 'n', strtolower($datum->last_name)))))).$id;
                     $user->profile_picture_path = 'img/defaults/icon-user-default.png';
                     $user->password = Hash::make('12345');
                     $user->is_admin_activated = true;

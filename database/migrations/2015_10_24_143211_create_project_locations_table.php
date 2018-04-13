@@ -12,7 +12,7 @@ class CreateProjectLocationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_locations', function (Blueprint $table) {
+        /*Schema::create('project_locations', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('project_id');
             $table->string('coordinates');
@@ -22,7 +22,7 @@ class CreateProjectLocationsTable extends Migration
             $table->string('street',30)->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -32,6 +32,6 @@ class CreateProjectLocationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('project_locations');
+        //Schema::drop('project_locations');
     }
 }

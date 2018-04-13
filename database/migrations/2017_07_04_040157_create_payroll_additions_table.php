@@ -12,14 +12,14 @@ class CreatePayrollAdditionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payroll_additions', function (Blueprint $table) {
+        /*Schema::create('payroll_additions', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('user_id');
             $table->string('date', 10);
             $table->double('amount');
             $table->integer('payroll_addition_type_id');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**

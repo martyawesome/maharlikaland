@@ -12,7 +12,7 @@ class CreateDevelopersTable extends Migration
      */
     public function up()
     {
-        Schema::create('developers', function (Blueprint $table) {
+        /*Schema::create('developers', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('name');
             $table->string('slug');
@@ -33,7 +33,7 @@ class CreateDevelopersTable extends Migration
             $table->string('banner_path');
             $table->boolean('is_activated');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -43,6 +43,6 @@ class CreateDevelopersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('developers');
+        //Schema::drop('developers');
     }
 }

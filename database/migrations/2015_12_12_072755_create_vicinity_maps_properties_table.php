@@ -12,12 +12,12 @@ class CreateVicinityMapsPropertiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('vicinity_maps_properties', function (Blueprint $table) {
+        /*Schema::create('vicinity_maps_properties', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('property_id');
             $table->string('image_path');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +27,6 @@ class CreateVicinityMapsPropertiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('vicinity_maps_properties');
+        //Schema::drop('vicinity_maps_properties');
     }
 }

@@ -12,12 +12,12 @@ class CreateElectricitySourcesTable extends Migration
      */
     public function up()
     {
-        Schema::create('electricity_sources', function (Blueprint $table) {
+        /*Schema::create('electricity_sources', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('project_id');
             $table->string('electricity_source',30);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +27,6 @@ class CreateElectricitySourcesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('electricity_sources');
+        //Schema::drop('electricity_sources');
     }
 }

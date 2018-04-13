@@ -12,12 +12,12 @@ class CreateModelUnitImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('model_unit_images', function (Blueprint $table) {
+        /*Schema::create('model_unit_images', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('model_unit_id');
             $table->string('image_path');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +27,6 @@ class CreateModelUnitImagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('model_unit_images');
+        //Schema::drop('model_unit_images');
     }
 }

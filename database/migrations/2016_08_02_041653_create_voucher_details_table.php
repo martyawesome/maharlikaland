@@ -12,7 +12,7 @@ class CreateVoucherDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('voucher_details', function (Blueprint $table) {
+        /*Schema::create('voucher_details', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('voucher_id');
             $table->integer('account_title_id');
@@ -20,7 +20,7 @@ class CreateVoucherDetailsTable extends Migration
             $table->double('amount');
             $table->text('remarks')->nullable();
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -30,6 +30,6 @@ class CreateVoucherDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('voucher_details');
+        //Schema::drop('voucher_details');
     }
 }

@@ -12,14 +12,13 @@ class CreateHolidaysTable extends Migration
      */
     public function up()
     {
-        Schema::create('holidays', function (Blueprint $table) {
+        /*Schema::create('holidays', function (Blueprint $table) {
             $table->increments('id')->index();
-            $table->integer('developer_id');
             $table->string('date', 10);
             $table->string('name', 30);
             $table->integer('type');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -29,6 +28,6 @@ class CreateHolidaysTable extends Migration
      */
     public function down()
     {
-        Schema::drop('holidays');
+        //Schema::drop('holidays');
     }
 }

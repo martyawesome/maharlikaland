@@ -12,14 +12,14 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('blogs', function (Blueprint $table) {
+        /*Schema::create('blogs', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('title');
             $table->string('slug');
             $table->text('body');
             $table->date('date');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -29,6 +29,6 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('blogs');
+        //Schema::drop('blogs');
     }
 }

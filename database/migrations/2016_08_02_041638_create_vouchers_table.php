@@ -12,7 +12,7 @@ class CreateVouchersTable extends Migration
      */
     public function up()
     {
-        Schema::create('vouchers', function (Blueprint $table) {
+        /*Schema::create('vouchers', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('voucher_number');
             $table->date('date');
@@ -20,7 +20,7 @@ class CreateVouchersTable extends Migration
             $table->string('issued_by', 50);
             $table->string('received_by',50);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -30,6 +30,6 @@ class CreateVouchersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('vouchers');
+        //Schema::drop('vouchers');
     }
 }

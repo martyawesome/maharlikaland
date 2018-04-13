@@ -144,11 +144,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <ul class="sidebar-menu">
           <li class="header"></li>
-          <li>
+          <li class="">
               <a href="{{ URL::route('developer_dashboard') }}"><i class="fa fa-television"></i> <span>Dashboard</span></a>
           </li>
           @if(Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ADMIN'))
-            <li class="treeview">
+            <li class="treeview {{ request()->is('manage/projects*') ? 'active' : '' }}">
               <a href="#"><i class="fa fa-building-o"></i> <span>Projects</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
                 <li><a href="{{ URL::route('add_project') }}"><i class="fa fa-plus"></i>Add Project</a></li>
@@ -158,7 +158,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           @else
             <li><a href="{{ URL::route('projects') }}"><i class="fa fa-building-o"></i>Projects</a></li>
           @endif
-          <li class="treeview">
+          <li class="treeview  {{ request()->is('manage/ledgers*') ? 'active' : '' }}">
             @if(Auth::user()->user_type_id == config('constants.USER_TYPE_ADMIN') 
               or Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ADMIN') 
               or Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_SECRETARY'))
@@ -186,7 +186,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </ul>
             </li>
           @endif
-          <li class="treeview">
+          <li class="treeview  {{ request()->is('manage/accounting*') ? 'active' : '' }}">
             @if(Auth::user()->user_type_id == config('constants.USER_TYPE_ADMIN')
             or Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ADMIN')
             or Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_SECRETARY'))
@@ -203,7 +203,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           @if(Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ADMIN')
           or Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_SECRETARY'))
-            <li class="treeview">
+            <li class="treeview {{ request()->is('manage/buyers*') ? 'active' : '' }}">
               <a href="#"><i class="fa fa-user"></i> <span>Buyers</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
                 <li><a href="{{ URL::route('add_buyer') }}"><i class="fa fa-user-plus"></i>New Buyer</a></li>
@@ -211,24 +211,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </ul>
             </li>
           @endif
-          <li class="treeview">
+          <li class="treeview  {{ request()->is('manage/prospect_buyers*') ? 'active' : '' }}">
             <a href="#"><i class="fa fa-user"></i> <span>Prospect Buyers</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
               <li><a href="{{ URL::route('add_prospect_buyer') }}"><i class="fa fa-user-plus"></i>New Prospect Buyer</a></li>
               <li><a href="{{ URL::route('prospect_buyers') }}"><i class="fa fa-users"></i>All Prospect Buyers</a></li>
             </ul>
           </li>
-          <li class="treeview">
+          <li class="treeview  {{ request()->is('manage/marketing*') ? 'active' : '' }}">
             <a href="#"><i class="fa fa-bullhorn"></i> <span>Marketing</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
               <li><a href="{{ URL::route('promotional_images') }}"><i class="fa fa-camera-retro"></i>Promotional Images</a></li>
               <li><a href="{{ URL::route('promotional_videos') }}"><i class="fa fa-video-camera"></i>Promotional Videos</a></li>
             </ul>
           </li>
-          @if(Auth::user()->user_type_id == config('constants.USER_TYPE_ADMIN') 
+           <!-- @if(Auth::user()->user_type_id == config('constants.USER_TYPE_ADMIN') 
               or Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ADMIN')
               or Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_SECRETARY'))
-            <li class="treeview">
+            <li class="treeview  {{ request()->is('manage/payroll*') ? 'active' : '' }}">
               <a href="#"><i class="fa fa-money"></i> <span>Payroll</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
                 <li><a href="{{ URL::route('generate_payroll') }}"><i class="fa fa-print"></i>Generate</a></li>
@@ -240,7 +240,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </ul>
             </li>
           @endif
-          <!-- <li class="treeview">
+         <li class="treeview">
             @if(Auth::user()->user_type_id == config('constants.USER_TYPE_ADMIN') 
               or Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ADMIN')
               or Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_SECRETARY'))
@@ -252,11 +252,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             @else
               <a href="{{ URL::route('developers_agents') }}"><i class="fa fa-users"></i> <span>My Agents</span></i></a>
             @endif
-          </li> -->
-          <li>
+          </li> 
+          <li class=" {{ request()->is('manage/attendance*') ? 'active' : '' }}">
               <a href="{{ URL::route('attendance') }}"><i class="fa fa-calendar"></i> <span>Attendances</span></a>
           </li>
-          <li class="treeview">
+          -->
+          <li class="treeview  {{ request()->is('manage/journals*') ? 'active' : '' }}">
             <a href="#"><i class="fa fa-newspaper-o"></i> <span>Journals</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
               <li><a href="{{ URL::route('journal_types') }}"><i class="fa fa-info-circle"></i>Types</a></li>
@@ -265,10 +266,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           @if(Auth::user()->user_type_id == config('constants.USER_TYPE_ADMIN') 
               or Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ADMIN'))
-            <li class="treeview">
+            <li class="treeview {{ request()->is('manage/users*') ? 'active' : '' }}">
               <a href="#"><i class="fa fa-users"></i> <span>Users</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
-                <li><a href="{{ URL::route('my_admin_account',array(Auth::user()->id)) }}"><i class="fa fa-user"></i>My Account</a></li>
+                <li><a href="{{ URL::route('my_admin_account',array(Auth::user()->username)) }}"><i class="fa fa-user"></i>My Account</a></li>
                 <li><a href="{{ URL::route('add_user') }}"><i class="fa fa-user-plus"></i>New User</a></li>
                 <li><a href="{{ URL::route('users') }}"><i class="fa fa-users"></i>All Users</a></li>
               </ul>

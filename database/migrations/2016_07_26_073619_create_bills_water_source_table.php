@@ -12,7 +12,7 @@ class CreateBillsWaterSourceTable extends Migration
      */
     public function up()
     {
-        Schema::create('bills_water_source', function (Blueprint $table) {
+        /*Schema::create('bills_water_source', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('project_id');
             $table->string('date_covered',30);
@@ -20,7 +20,7 @@ class CreateBillsWaterSourceTable extends Migration
             $table->double('bill');
             $table->text('remarks')->nullable();
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -30,6 +30,6 @@ class CreateBillsWaterSourceTable extends Migration
      */
     public function down()
     {
-        Schema::drop('bills_water_source');
+        //Schema::drop('bills_water_source');
     }
 }

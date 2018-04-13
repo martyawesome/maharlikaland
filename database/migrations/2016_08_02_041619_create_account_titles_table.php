@@ -12,13 +12,12 @@ class CreateAccountTitlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('account_titles', function (Blueprint $table) {
+        /*Schema::create('account_titles', function (Blueprint $table) {
             $table->increments('id')->index();
-            $table->integer('developer_id');
             $table->string('title', 100);
             $table->string('slug', 150);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -28,6 +27,6 @@ class CreateAccountTitlesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('account_titles');
+        //Schema::drop('account_titles');
     }
 }

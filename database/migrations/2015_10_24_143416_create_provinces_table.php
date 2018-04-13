@@ -12,11 +12,11 @@ class CreateProvincesTable extends Migration
      */
     public function up()
     {
-        Schema::create('provinces', function (Blueprint $table) {
+        /*Schema::create('provinces', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('name',20);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -26,6 +26,6 @@ class CreateProvincesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('provinces');
+        //Schema::drop('provinces');
     }
 }

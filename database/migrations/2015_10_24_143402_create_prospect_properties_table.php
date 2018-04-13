@@ -12,14 +12,14 @@ class CreateProspectPropertiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('prospect_properties', function (Blueprint $table) {
+        /*Schema::create('prospect_properties', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('property_id');
             $table->integer('agent_id')->nullable();
             $table->integer('prospect_buyer_id');
             $table->string('appointment_slip_path')->nullable();
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -29,6 +29,6 @@ class CreateProspectPropertiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('prospect_properties');
+        //Schema::drop('prospect_properties');
     }
 }

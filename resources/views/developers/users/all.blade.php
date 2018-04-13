@@ -32,7 +32,7 @@
               </thead>
               <tbody>
                 @foreach($users as $user)
-                  <tr class='clickable-row' style="cursor: pointer;" data-href="{{ URL::route('user',$user->id) }}">
+                  <tr class='clickable-row' style="cursor: pointer;" data-href="{{ URL::route('user',$user->username) }}">
                     <td><img class="table-profile-pic" src="<?php echo asset("").$user->profile_picture_path?>" alt="User profile picture"></td>
                     <td>
                       <b>

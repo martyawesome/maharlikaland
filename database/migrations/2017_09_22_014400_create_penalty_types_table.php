@@ -12,12 +12,11 @@ class CreatePenaltyTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('penalty_types', function (Blueprint $table) {
+        /*Schema::create('penalty_types', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('type', 30);
-            $table->integer('developer_id');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +26,6 @@ class CreatePenaltyTypesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('penalty_types');
+        //Schema::drop('penalty_types');
     }
 }

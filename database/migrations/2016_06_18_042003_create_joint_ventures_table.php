@@ -12,13 +12,13 @@ class CreateJointVenturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('joint_ventures', function (Blueprint $table) {
+        /*Schema::create('joint_ventures', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('project_id');
             $table->string('name',50);
             $table->string('slug',50);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateJointVenturesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('joint_ventures');
+        //Schema::drop('joint_ventures');
     }
 }

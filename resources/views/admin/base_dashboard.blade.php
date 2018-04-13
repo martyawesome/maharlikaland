@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>ResApp - Admin</title>
-  <link rel="icon" href="{{ asset('img/maharlika.png') }}" type="image/gif" sizes="16x16">
+  <link rel="icon" href="{{ asset('img/resapp-logo.png') }}" type="image/gif" sizes="16x16">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   
@@ -124,7 +124,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- Menu Toggle Button -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <!-- The user image in the navbar-->
-                <img src="<?php echo asset("").Auth::user()->profile_picture_path?>" class="user-image" alt="User Image">
+                <img src="{{ asset(Auth::user()->profile_picture_path) }}" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                 <span class="hidden-xs">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
               </a>

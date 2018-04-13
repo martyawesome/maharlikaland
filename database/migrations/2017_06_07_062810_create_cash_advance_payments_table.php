@@ -12,13 +12,13 @@ class CreateCashAdvancePaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cash_advance_payments', function (Blueprint $table) {
+        /*Schema::create('cash_advance_payments', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('user_id');
             $table->string('date', 10);
             $table->double('amount');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateCashAdvancePaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('cash_advance_payments');
+        //Schema::drop('cash_advance_payments');
     }
 }

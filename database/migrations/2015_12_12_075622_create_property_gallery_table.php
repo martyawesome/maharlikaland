@@ -12,12 +12,12 @@ class CreatePropertyGalleryTable extends Migration
      */
     public function up()
     {
-        Schema::create('property_gallery', function (Blueprint $table) {
+        /*Schema::create('property_gallery', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('property_id');
             $table->text('image_path');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +27,6 @@ class CreatePropertyGalleryTable extends Migration
      */
     public function down()
     {
-        Schema::drop('property_gallery');
+        //Schema::drop('property_gallery');
     }
 }

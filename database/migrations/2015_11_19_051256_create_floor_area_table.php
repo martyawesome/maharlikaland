@@ -12,13 +12,13 @@ class CreateFloorAreaTable extends Migration
      */
     public function up()
     {
-        Schema::create('floor_areas', function (Blueprint $table) {
+        /*Schema::create('floor_areas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id');
             $table->integer('floor_id');
             $table->double('floor_area');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateFloorAreaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('floor_areas');
+        //Schema::drop('floor_areas');
     }
 }

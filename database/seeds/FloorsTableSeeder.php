@@ -10,7 +10,7 @@ class FloorsTableSeeder extends Seeder
     {
         DB::table('floors')->delete();
 
-        for($i = 0; $i < 5; $i++) {
+        for($i = 0; $i < 100; $i++) {
             $records[$i] = ['id' => $i + 1, 'floor' => $i + 1];
         }
 

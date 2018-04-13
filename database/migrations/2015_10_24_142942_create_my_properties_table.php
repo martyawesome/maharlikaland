@@ -12,14 +12,14 @@ class CreateMyPropertiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('my_properties', function (Blueprint $table) {
+        /*Schema::create('my_properties', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('property_id');
             $table->double('unpaid_penalty');
             $table->double('remaining_balance');
             $table->double('total_payment');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -29,6 +29,6 @@ class CreateMyPropertiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('my_properties');
+        //Schema::drop('my_properties');
     }
 }

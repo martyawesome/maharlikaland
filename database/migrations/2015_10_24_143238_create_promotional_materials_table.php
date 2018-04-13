@@ -12,14 +12,14 @@ class CreatePromotionalMaterialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('promotional_materials', function (Blueprint $table) {
+        /*Schema::create('promotional_materials', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('project_id');
             $table->string('file_path');
             $table->integer('media_type_id');
             $table->string('extension');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -29,6 +29,6 @@ class CreatePromotionalMaterialsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('promotional_materials');
+        //Schema::drop('promotional_materials');
     }
 }

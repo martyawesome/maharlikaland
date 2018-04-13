@@ -12,12 +12,12 @@ class CreateProjectGalleryTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_gallery', function (Blueprint $table) {
+        /*Schema::create('project_gallery', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('project_id');
             $table->text('image_path');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +27,6 @@ class CreateProjectGalleryTable extends Migration
      */
     public function down()
     {
-        Schema::drop('project_gallery');
+        //Schema::drop('project_gallery');
     }
 }

@@ -80,9 +80,9 @@ Route::filter('auth_developer_already_logged_in', function()
 
 
 
-Route::bind('user',function($datum)
+Route::bind('user',function($username)
 {
-	$user =  App\User::find($datum);
+	$user =  App\User::whereUsername($username)->first();
 	if($user == null) $user = new App\User();
 	return $user;
 });
@@ -353,7 +353,7 @@ Route::group(['namespace' => 'Admin'], function()  {
 	});
 });
 
-Route::group(['namespace' => 'Agents'], function()  {
+/*Route::group(['namespace' => 'Agents'], function()  {
 	Route::group(['prefix' => 'manage'], function ()  {
 		Route::group(['prefix' => 'agents'], function ()  {
 
@@ -388,11 +388,10 @@ Route::group(['namespace' => 'Agents'], function()  {
 			});
 		});
 	});
-});
+});*/
 
 Route::group(['namespace' => 'Developers'], function()  {
 	Route::group(['prefix' => 'manage'], function ()  {
-		Route::group(['prefix' => 'developers'], function ()  {
 
 			Route::group(['before' => 'auth_developer_already_logged_in'], function ()  {
 				Route::get('/login', ['as' => 'developer_login','uses' => 'BaseController@showLogin']);
@@ -405,7 +404,7 @@ Route::group(['namespace' => 'Developers'], function()  {
 				Route::get('/', ['as' => 'developer_dashboard','uses' => 'BaseController@dashboard']);
 
 				// Projects
-				Route::get('/add_project', ['as' => 'add_project','uses' => 'ProjectsController@showAddProject']);
+				Route::get('/projects/add', ['as' => 'add_project','uses' => 'ProjectsController@showAddProject']);
 				Route::get('/projects', ['as' => 'projects','uses' => 'ProjectsController@showAllProjects']);
 				Route::get('/projects/{project}', ['as' => 'project','uses' => 'ProjectsController@viewProject']);
 				Route::get('/projects/{project}/delete', ['as' => 'delete_project','uses' => 'ProjectsController@deleteProject']);
@@ -429,7 +428,7 @@ Route::group(['namespace' => 'Developers'], function()  {
 				Route::get('/projects/{project}/delete_photos/{project_photo_ids}', ['as' => 'delete_project_images', 'uses' => 'ProjectsController@deleteProjectImages']);
 				
 				// Projects
-				Route::post('/add_project', 'ProjectsController@addProject');
+				Route::post('/projects/add', 'ProjectsController@addProject');
 				Route::post('/projects/{project}/edit/basic_info', 'ProjectsController@editBasicInfo');
 				Route::post('/projects/{project}/edit/location', 'ProjectsController@editLocation');
 				Route::post('/projects/{project}/edit/sources', 'ProjectsController@editSources');
@@ -478,35 +477,35 @@ Route::group(['namespace' => 'Developers'], function()  {
 				Route::post('/agents/remove/{developer_agent}','AgentsController@removeDeveloperAgent');
 
 				// Buyers
-				Route::get('/add_buyer', ['as' => 'add_buyer','uses' => 'BuyersController@showAddBuyer']);
+				Route::get('/buyers/add', ['as' => 'add_buyer','uses' => 'BuyersController@showAddBuyer']);
 				Route::get('/buyers', ['as' => 'buyers','uses' => 'BuyersController@showBuyers']);
-				Route::get('/buyer/{buyer}', ['as' => 'buyer','uses' => 'BuyersController@showBuyer']);
-				Route::get('/buyer/{buyer}/edit', ['as' => 'edit_buyer','uses' => 'BuyersController@showEditBuyer']);
-				Route::get('/buyer/{buyer}/create_user_account', ['as' => 'create_buyer_user_account','uses' => 'BuyersController@showCreateBuyerUserAccount']);
+				Route::get('/buyers/{buyer}', ['as' => 'buyer','uses' => 'BuyersController@showBuyer']);
+				Route::get('/buyers/{buyer}/edit', ['as' => 'edit_buyer','uses' => 'BuyersController@showEditBuyer']);
+				Route::get('/buyers/{buyer}/create_user_account', ['as' => 'create_buyer_user_account','uses' => 'BuyersController@showCreateBuyerUserAccount']);
 				
 				// Buyers
-				Route::post('/add_buyer', 'BuyersController@addBuyer');
-				Route::post('/buyer/{buyer}/edit', 'BuyersController@editBuyer');
-				Route::post('/buyer/{buyer}/delete', 'BuyersController@deleteBuyer');
-				Route::post('/buyer/{buyer}/create_user_account', 'BuyersController@createBuyerUserAccount');
+				Route::post('/buyers/add', 'BuyersController@addBuyer');
+				Route::post('/buyers/{buyer}/edit', 'BuyersController@editBuyer');
+				Route::post('/buyers/{buyer}/delete', 'BuyersController@deleteBuyer');
+				Route::post('/buyers/{buyer}/create_user_account', 'BuyersController@createBuyerUserAccount');
 				Route::post('/buyers','BuyersController@importFromExcel');
 
 				// Prospect Buyers
-				Route::get('/add_prospect_buyer', ['as' => 'add_prospect_buyer','uses' => 'ProspectBuyersController@showAddProspectBuyer']);
+				Route::get('/prospect_buyers/add', ['as' => 'add_prospect_buyer','uses' => 'ProspectBuyersController@showAddProspectBuyer']);
 				Route::get('/prospect_buyers', ['as' => 'prospect_buyers','uses' => 'ProspectBuyersController@showProspectBuyers']);
 				Route::get('/prospect_buyer/{prospect_buyer}', ['as' => 'prospect_buyer','uses' => 'ProspectBuyersController@showProspectBuyer']);
 				Route::get('/prospect_buyer/{prospect_buyer}/edit', ['as' => 'edit_prospect_buyer','uses' => 'ProspectBuyersController@showEditProspectBuyer']);
 				Route::get('/prospect_buyer/{prospect_buyer}/upgrade', ['as' => 'upgrade_prospect_buyer','uses' => 'ProspectBuyersController@showUpgradeProspectBuyer']);
 				
 				// Prospect Buyers
-				Route::post('/add_prospect_buyer', 'ProspectBuyersController@addProspectBuyer');
+				Route::post('/prospect_buyers/add', 'ProspectBuyersController@addProspectBuyer');
 				Route::post('/prospect_buyer/{prospect_buyer}/edit', 'ProspectBuyersController@editProspectBuyer');
 				Route::post('/prospect_buyer/{prospect_buyer}/upgrade', 'ProspectBuyersController@upgradeProspectBuyer');
 				Route::post('/prospect_buyer/{prospect_buyer}/delete', 'ProspectBuyersController@deleteProspectBuyer');
 				
 				// Ledger Accounts
-				Route::get('/new_ledger', ['as' => 'new_ledger_buyers','uses' => 'InstallmentAccountLedgersController@showBuyers']);
-				Route::get('/new_ledger/{buyer}', ['as' => 'new_ledger','uses' => 'InstallmentAccountLedgersController@showAddLedger']);
+				Route::get('/ledgers/add', ['as' => 'new_ledger_buyers','uses' => 'InstallmentAccountLedgersController@showBuyers']);
+				Route::get('/ledgers/add/{buyer}', ['as' => 'new_ledger','uses' => 'InstallmentAccountLedgersController@showAddLedger']);
 				Route::get('/ledgers', ['as' => 'ledgers_buyers','uses' => 'InstallmentAccountLedgersController@showLedgersBuyers']);
 				Route::get('/ledgers/{buyer}', ['as' => 'ledger_properties','uses' => 'InstallmentAccountLedgersController@showLedgerProperties']);
 				Route::get('/ledgers/{buyer}/{property}', ['as' => 'ledger','uses' => 'InstallmentAccountLedgersController@showLedger']);
@@ -523,7 +522,7 @@ Route::group(['namespace' => 'Developers'], function()  {
 				Route::get('/penalty_calculator', ['as' => 'penalty_calculator', 'uses' => 'InstallmentAccountLedgersController@showPenaltyCalculator']);
 
 				// Ledger Accounts
-				Route::post('/new_ledger/{buyer}','InstallmentAccountLedgersController@addLedger');
+				Route::post('/ledgers/add/{buyer}','InstallmentAccountLedgersController@addLedger');
 				Route::post('/ledgers/{buyer}/edit/{ledger}','InstallmentAccountLedgersController@editLedger');
 				Route::post('/ledgers/{buyer}/delete/{ledger}', 'InstallmentAccountLedgersController@deleteLedger');
 				// Ledger Accounts - Entries
@@ -728,7 +727,6 @@ Route::group(['namespace' => 'Developers'], function()  {
 				Route::post('/user/{user}/delete', 'UsersController@deleteUser');
 				Route::post('/users', 'UsersController@importFromExcel');
 			});
-		});
 	});
 });
 

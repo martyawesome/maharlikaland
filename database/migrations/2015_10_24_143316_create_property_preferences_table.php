@@ -12,12 +12,12 @@ class CreatePropertyPreferencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('property_preferences', function (Blueprint $table) {
+        /*Schema::create('property_preferences', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('agent_id');
             $table->integer('property_type_id');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +27,6 @@ class CreatePropertyPreferencesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('property_preferences');
+        //Schema::drop('property_preferences');
     }
 }

@@ -12,11 +12,11 @@ class CreateAgentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('agents', function (Blueprint $table) {
+        /*Schema::create('agents', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('prc_license_number',30)->index();
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -26,6 +26,6 @@ class CreateAgentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('agents');
+        //Schema::drop('agents');
     }
 }

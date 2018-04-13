@@ -12,11 +12,11 @@ class CreateProjectTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_types', function (Blueprint $table) {
+        /*Schema::create('project_types', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('project_type',15);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -26,6 +26,6 @@ class CreateProjectTypesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('project_types');
+        //Schema::drop('project_types');
     }
 }

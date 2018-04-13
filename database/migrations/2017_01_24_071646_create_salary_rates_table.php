@@ -12,12 +12,12 @@ class CreateSalaryRatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('salary_rates', function (Blueprint $table) {
+        /*Schema::create('salary_rates', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('user_id');
             $table->double('rate');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +27,6 @@ class CreateSalaryRatesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('salary_rates');
+        //Schema::drop('salary_rates');
     }
 }

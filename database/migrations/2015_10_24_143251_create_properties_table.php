@@ -12,7 +12,7 @@ class CreatePropertiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('properties', function (Blueprint $table) {
+        /*Schema::create('properties', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('name',50);
             $table->string('slug');
@@ -29,13 +29,11 @@ class CreatePropertiesTable extends Migration
             $table->integer('parking_availability_id')->nullable();
             $table->double('price')->nullable();
             $table->double('price_per_sqm')->nullable();
-            $table->integer('property_status_id');
-            $table->integer('agent_id');
-            $table->integer('developer_id');
+            $table->integer('property_status_id');desc 
             $table->integer('buyer_id');
             $table->text('main_picture_path');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -45,6 +43,6 @@ class CreatePropertiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('properties');
+        //Schema::drop('properties');
     }
 }

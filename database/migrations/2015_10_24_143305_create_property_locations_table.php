@@ -12,7 +12,7 @@ class CreatePropertyLocationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('property_locations', function (Blueprint $table) {
+        /*Schema::create('property_locations', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('property_id');
             $table->string('coordinates');
@@ -25,7 +25,7 @@ class CreatePropertyLocationsTable extends Migration
             $table->integer('unit_number')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -35,6 +35,6 @@ class CreatePropertyLocationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('property_locations');
+        //Schema::drop('property_locations');
     }
 }

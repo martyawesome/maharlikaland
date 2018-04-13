@@ -12,12 +12,12 @@ class CreateAccreditationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('accreditations', function (Blueprint $table) {
+        /*Schema::create('accreditations', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('agent_id');
             $table->string('accreditation',30);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +27,6 @@ class CreateAccreditationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('accreditations');
+        //Schema::drop('accreditations');
     }
 }

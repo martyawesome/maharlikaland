@@ -12,12 +12,11 @@ class CreateJournalTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('journal_types', function (Blueprint $table) {
+        /*Schema::create('journal_types', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('type', 30);
-            $table->integer('developer_id');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +26,6 @@ class CreateJournalTypesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('journal_types');
+        //Schema::drop('journal_types');
     }
 }

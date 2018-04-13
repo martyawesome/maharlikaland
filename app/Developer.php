@@ -24,7 +24,7 @@ class Developer extends Model
     *
     */
     public static function getCurrentDeveloper() {
-        return Developer::whereId(Auth::user()->developer_id)->first();
+        return Developer::first();
     }
 
     /**

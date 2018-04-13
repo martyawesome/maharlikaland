@@ -12,13 +12,13 @@ class CreateAboutMeTable extends Migration
      */
     public function up()
     {
-        Schema::create('about_me', function (Blueprint $table) {
+        /*Schema::create('about_me', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('agent_id')->index();
             $table->string('header');
             $table->text('content');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateAboutMeTable extends Migration
      */
     public function down()
     {
-        Schema::drop('about_me');
+        //Schema::drop('about_me');
     }
 }

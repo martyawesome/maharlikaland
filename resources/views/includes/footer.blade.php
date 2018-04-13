@@ -2,5 +2,5 @@
 	<div class="pull-right hidden-xs">
 	  Real Estate Services Application v0.1
 	</div>
-	<strong>Copyright &copy; Marty Hernandez 2017</strong>
+	<strong>Copyright &copy; Marty Hernandez 2018</strong>
 </footer>

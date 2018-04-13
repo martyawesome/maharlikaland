@@ -31,17 +31,17 @@
 
   <section class="content">  
     @if(Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ADMIN'))
-      {!! link_to_route('edit_admin_account', 'Edit', array($user->email), ['class' => 'btn btn-primary', 'style' => 'margin-right:5px;']) !!}
+      {!! link_to_route('edit_admin_account', 'Edit', array($user->username), ['class' => 'btn btn-primary', 'style' => 'margin-right:5px;']) !!}
     @else
-      {!! link_to_route('edit_account', 'Edit', array($user->email), ['class' => 'btn btn-primary', 'style' => 'margin-right:5px;']) !!}
+      {!! link_to_route('edit_account', 'Edit', array($user->username), ['class' => 'btn btn-primary', 'style' => 'margin-right:5px;']) !!}
     @endif
 
     @if(Auth::user()->user_type_id == config('constants.USER_TYPE_ADMIN') or 
     Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ADMIN'))
       @if($agent)
-        {!! link_to_route('user_edit_broker', 'Edit Broker', array($user->email, $agent->prc_license_number), ['class' => 'btn btn-success', 'style' => 'margin-right:5px;']) !!}
+        {!! link_to_route('user_edit_broker', 'Edit Broker', array($user->username, $agent->prc_license_number), ['class' => 'btn btn-success', 'style' => 'margin-right:5px;']) !!}
       @else
-        {!! link_to_route('user_new_broker', 'New Broker', array($user->id), ['class' => 'btn btn-success', 'style' => 'margin-right:5px;']) !!}
+        {!! link_to_route('user_new_broker', 'New Broker', array($user->username), ['class' => 'btn btn-success', 'style' => 'margin-right:5px;']) !!}
       @endif
     @endif
   </section>

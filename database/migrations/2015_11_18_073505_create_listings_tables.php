@@ -12,13 +12,13 @@ class CreateListingsTables extends Migration
      */
     public function up()
     {
-        Schema::create('listings', function (Blueprint $table) {
+        /*Schema::create('listings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id');
             $table->integer('agent_id');
             $table->double('commission');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateListingsTables extends Migration
      */
     public function down()
     {
-        Schema::drop('listings');
+        //Schema::drop('listings');
     }
 }

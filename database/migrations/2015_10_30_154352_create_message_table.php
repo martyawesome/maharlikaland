@@ -12,7 +12,7 @@ class CreateMessageTable extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        /*Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('sender',50);
             $table->string('subject');
@@ -20,7 +20,7 @@ class CreateMessageTable extends Migration
             $table->text('message');
             $table->boolean('has_been_seen');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -30,6 +30,6 @@ class CreateMessageTable extends Migration
      */
     public function down()
     {
-        Schema::drop('messages');
+        //Schema::drop('messages');
     }
 }

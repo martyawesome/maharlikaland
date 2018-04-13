@@ -12,7 +12,7 @@ class CreateBuyersTable extends Migration
      */
     public function up()
     {
-        Schema::create('buyers', function (Blueprint $table) {
+        /*Schema::create('buyers', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('first_name',30);
             $table->string('middle_name',30)->nullable();
@@ -32,7 +32,7 @@ class CreateBuyersTable extends Migration
             $table->string('company_address',50)->nullable();
             $table->integer('agent_id')->nullable();
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -42,6 +42,6 @@ class CreateBuyersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('buyers');
+        //Schema::drop('buyers');
     }
 }

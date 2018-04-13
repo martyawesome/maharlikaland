@@ -83,6 +83,7 @@ class BaseController extends Controller
             return redirect(route('developer_login'))->withDanger('Invalid Credentials');
         }*/
 
+        $remembered = $request->get('remember_me') == "on" ? true : false;
         $field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         $request->merge([$field => $request->input('login')]);
 

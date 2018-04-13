@@ -24,9 +24,7 @@ class Voucher extends Model
     //public static function getAll(Project $project)
     public static function getAll()
     {
-    	$developer = Developer::getCurrentDeveloper();
-    	return Voucher::leftJoin(DB::raw('(select voucher_id, sum(amount) as details_amount from voucher_details group by voucher_id) as v'),'v.voucher_id','=','vouchers.id')
-        ->whereRaw('vouchers.developer_id = '.$developer->id)->get();
+    	return Voucher::leftJoin(DB::raw('(select voucher_id, sum(amount) as details_amount from voucher_details group by voucher_id) as v'),'v.voucher_id','=','vouchers.id')->get();
     }
 
     /**
@@ -37,13 +35,11 @@ class Voucher extends Model
 	{
 		DB::beginTransaction();
 
-		$developer = Developer::getCurrentDeveloper();
 		$voucher->date = $request->get('date');
 		$voucher->voucher_number = $request->get('voucher_number');
 		$voucher->payee = $request->get('payee');
 		$voucher->issued_by = $request->get('issued_by');
 		$voucher->received_by = $request->get('received_by');
-		$voucher->developer_id = $developer->id;
 
 		if($voucher->touch()) {
 			$return["success"] = true;

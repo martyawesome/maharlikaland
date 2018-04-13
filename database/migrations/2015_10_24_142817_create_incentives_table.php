@@ -12,13 +12,13 @@ class CreateIncentivesTable extends Migration
      */
     public function up()
     {
-        Schema::create('incentives', function (Blueprint $table) {
+        /*Schema::create('incentives', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('project_id');
             $table->text('incentive');
             $table->text('slug');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateIncentivesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('incentives');
+        //Schema::drop('incentives');
     }
 }

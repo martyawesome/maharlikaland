@@ -12,12 +12,12 @@ class CreatePriceListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('price_lists', function (Blueprint $table) {
+        /*Schema::create('price_lists', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('project_id');
             $table->string('file_path');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +27,6 @@ class CreatePriceListsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('price_lists');
+        //Schema::drop('price_lists');
     }
 }

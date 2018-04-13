@@ -12,13 +12,13 @@ class CreateEventMediaTable extends Migration
      */
     public function up()
     {
-        Schema::create('blog_media', function (Blueprint $table) {
+        /*Schema::create('blog_media', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('blog_id');
             $table->string('file_path');
             $table->integer('media_type_id');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateEventMediaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('blog_media');
+        //Schema::drop('blog_media');
     }
 }

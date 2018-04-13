@@ -14,11 +14,11 @@ class MainAdminTableSeeder extends Seeder {
 
         $records = [
             ['id' => 1,
-                'username' => 'marty',
-                'password' => Hash::make('Julio54067'),
+                'username' => 'martyhernandez',
+                'password' => Hash::make('iOs54067!'),
                 'user_type_id' => 1,
                 'is_admin_activated' => true,
-                'profile_picture_path' => 'img/users/icon-user-default.png'
+                'profile_picture_path' => 'img/defaults/icon-user-default.png'
             ]
         ];
 

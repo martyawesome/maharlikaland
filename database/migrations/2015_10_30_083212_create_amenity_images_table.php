@@ -12,12 +12,12 @@ class CreateAmenityImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('amenity_images', function (Blueprint $table) {
+        /*Schema::create('amenity_images', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('amenity_id');
             $table->string('image_path');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +27,6 @@ class CreateAmenityImagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('amenity_images');
+        //Schema::drop('amenity_images');
     }
 }

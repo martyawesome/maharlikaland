@@ -12,14 +12,14 @@ class CreateModelUnitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('model_units', function (Blueprint $table) {
+        /*Schema::create('model_units', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('project_id');
             $table->string('model_unit',15);
             $table->float('price');
             $table->string('slug');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -29,6 +29,6 @@ class CreateModelUnitsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('model_units');
+        //Schema::drop('model_units');
     }
 }

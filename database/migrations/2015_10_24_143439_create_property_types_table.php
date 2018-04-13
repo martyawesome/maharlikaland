@@ -12,11 +12,11 @@ class CreatePropertyTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('property_types', function (Blueprint $table) {
+        /*Schema::create('property_types', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('property_type',25);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -26,6 +26,6 @@ class CreatePropertyTypesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('property_types');
+        //Schema::drop('property_types');
     }
 }

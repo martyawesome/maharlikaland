@@ -12,7 +12,7 @@ class CreateInstallmentAccountLedgerDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('installment_account_ledger_details', function (Blueprint $table) {
+        /*Schema::create('installment_account_ledger_details', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('installment_account_ledger_id');
             $table->integer('payment_type_id');
@@ -27,7 +27,7 @@ class CreateInstallmentAccountLedgerDetailsTable extends Migration
             $table->string('remarks')->nullable();
             $table->double('penalty')->nullable();
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -37,6 +37,6 @@ class CreateInstallmentAccountLedgerDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('installment_account_ledger_details');
+        //Schema::drop('installment_account_ledger_details');
     }
 }

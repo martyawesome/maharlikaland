@@ -12,11 +12,11 @@ class CreateNumberOfBedroomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('number_of_bedrooms', function (Blueprint $table) {
+        /*Schema::create('number_of_bedrooms', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('bedrooms');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -26,6 +26,6 @@ class CreateNumberOfBedroomsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('number_of_bedrooms');
+        //Schema::drop('number_of_bedrooms');
     }
 }

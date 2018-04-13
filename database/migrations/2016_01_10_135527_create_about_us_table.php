@@ -12,13 +12,13 @@ class CreateAboutUsTable extends Migration
      */
     public function up()
     {
-        Schema::create('about_us', function (Blueprint $table) {
+        /*Schema::create('about_us', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('project_id')->index();
             $table->string('header');
             $table->text('content');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateAboutUsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('about_us');
+        //Schema::drop('about_us');
     }
 }

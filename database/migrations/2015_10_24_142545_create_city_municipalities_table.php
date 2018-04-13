@@ -12,12 +12,12 @@ class CreateCityMunicipalitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('cities_municipalities', function (Blueprint $table) {
+        /*Schema::create('cities_municipalities', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('province_id');
             $table->string('name',30);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +27,6 @@ class CreateCityMunicipalitiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('cities_municipalities');
+        //Schema::drop('cities_municipalities');
     }
 }

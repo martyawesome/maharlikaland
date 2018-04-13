@@ -12,13 +12,13 @@ class CreateAmenitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('amenities', function (Blueprint $table) {
+        /*Schema::create('amenities', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('project_id');
             $table->string('slug');
             $table->string('amenity',30);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateAmenitiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('amenities');
+        //Schema::drop('amenities');
     }
 }

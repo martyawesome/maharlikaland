@@ -12,11 +12,11 @@ class CreateTermsOfPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('terms_of_payments', function (Blueprint $table) {
+        /*Schema::create('terms_of_payments', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('terms_of_payment');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -26,6 +26,6 @@ class CreateTermsOfPaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('terms_of_payments');
+        //Schema::drop('terms_of_payments');
     }
 }

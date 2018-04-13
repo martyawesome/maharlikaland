@@ -12,7 +12,7 @@ class CreateAttendancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        /*Schema::create('attendances', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('date', 10);
             $table->string('time_in', 8)->nullable();
@@ -20,7 +20,7 @@ class CreateAttendancesTable extends Migration
             $table->integer('property_id')->nullable();
             $table->integer('user_id');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -30,6 +30,6 @@ class CreateAttendancesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('attendances');
+        //Schema::drop('attendances');
     }
 }

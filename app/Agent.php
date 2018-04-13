@@ -31,9 +31,6 @@ class Agent extends Model
 
     	$agent = new Agent();
     	$agent->prc_license_number = $request->get('prc_license_number');
-        $agent->facebook_url = $request->get('facebook_url');
-        $agent->twitter_url = $request->get('twitter_url');
-        $agent->linkdin_url = $request->get('linkdin_url');
         $return["success"] = $agent->touch();
 
         if(!$user->id){
@@ -53,6 +50,9 @@ class Agent extends Model
                 $user->is_admin_activated = $request->get('is_admin_activated') == "on" ? true : false;
                 $user->is_mobile_activated = $request->get('is_mobile_activated') == "on" ? true : false;
                 $user->user_type_id = config('constants.USER_TYPE_BROKER');
+                $user->facebook_url = $request->get('facebook_url');
+                $user->twitter_url = $request->get('twitter_url');
+                $user->linkdin_url = $request->get('linkdin_url');
                 
                 if($request->file('image')) {
                     $imagePath = public_path() . '/img/users/brokers';

@@ -55,7 +55,7 @@ class BuyersController extends Controller
     */
     public function showBuyers()
     {
-    	$buyers = Buyer::getByDeveloper();
+    	$buyers = Buyer::get();
         return view('developers.buyers.all', compact('buyers'));
     }
 

@@ -138,7 +138,6 @@ class UsersController extends Controller
     public function addUser(CreateUserRequest $request)
     {
         $new_user = new User();
-        $new_user->developer_id = Auth::user()->developer_id;
         $return = User::createUser($new_user, $request);
         
         if($return["success"]) {

@@ -1,17 +1,17 @@
 
 .login-logo {
 	font-size: 6em;
-	color: #008d03;
+	color: #fe7902;
 }
 
 .login-logo-secondary {
-	color: #008d03;
+	color: #fe7902;
 	font-weight: 400;
 }
 
 .login-logo-small {
 	font-size: 2em;
-	color: #008d03;
+	color: #fe7902;
 	top: -20px;
 	position: relative;
 }
@@ -36,7 +36,7 @@
 .forgot-password {
 	position: relative;
 	top: 30px;
-	color: #fe7902;
+	color: #008d03;
 }
 
 

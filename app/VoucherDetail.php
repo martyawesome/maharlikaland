@@ -101,7 +101,6 @@ class VoucherDetail extends Model
         ->leftJoin('account_titles','account_titles.id','=','voucher_details.account_title_id')
         ->selectRaw('properties.name as property, vouchers.*, voucher_details.*, account_titles.title as account_title, projects.slug as project')
         ->orderBy('voucher_details.updated_at','desc')
-        ->whereRaw('properties.developer_id = '.Auth::user()->developer_id)
         ->take(10)
         ->get();
     }

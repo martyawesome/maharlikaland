@@ -12,7 +12,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        /*Schema::create('users', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('password', 60);
             $table->string('email',50)->unique()->nullable();
@@ -31,14 +31,13 @@ class CreateUsersTable extends Migration
             $table->boolean('able_to_sell');
             $table->integer('buyer_id');
             $table->integer('agent_id');
-            $table->integer('developer_id');
             $table->text('profile_picture_path');
             $table->string('facebook_url',50)->nullable();
             $table->string('twitter_url',50)->nullable();
             $table->string('linkdin_url',50)->nullable();
             $table->rememberToken();
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -48,6 +47,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        //Schema::drop('users');
     }
 }

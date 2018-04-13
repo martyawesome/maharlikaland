@@ -12,11 +12,11 @@ class CreateMediaTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('media_types', function (Blueprint $table) {
+        /*Schema::create('media_types', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('media_type',10);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -26,6 +26,6 @@ class CreateMediaTypesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('media_types');
+        //Schema::drop('media_types');
     }
 }

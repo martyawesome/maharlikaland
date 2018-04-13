@@ -12,11 +12,11 @@ class CreatePropertyStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('property_statuses', function (Blueprint $table) {
+        /*Schema::create('property_statuses', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('property_status',15);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -26,6 +26,6 @@ class CreatePropertyStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('property_statuses');
+        //Schema::drop('property_statuses');
     }
 }
