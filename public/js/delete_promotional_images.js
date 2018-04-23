@@ -27,13 +27,13 @@ function chooseObject(objectId) {
         $('#security-code-modal').modal('show');
     });
     $("#success-modal-button").click(function(){
-       window.location="/manage/developers/marketing/promotional_materials/images";
+       window.location="/manage/marketing/promotional_materials/images";
     });
     $("#submit-security-code-button").click(function(){
       var objectIds = btoa(JSON.stringify(window.objectIds));
       $.ajax({
           type: "POST",
-          url: "/manage/developers/marketing/promotional_materials/images/delete/"+objectIds,
+          url: "/manage/marketing/promotional_materials/images/delete/"+objectIds,
           data: {
             security_code : $('#security_code').val()
           },

@@ -27,10 +27,8 @@ class SalaryRate extends Model
     */
     public static function getAll()
     {
-    	$developer = Developer::getCurrentDeveloper();
     	return SalaryRate::selectRaw('users.first_name, users.middle_name, users.last_name, salary_rates.*')
     	->leftJoin('users','users.id','=','salary_rates.user_id')
-    	->whereRaw(DB::raw('users.developer_id = '.$developer->id))
     	->get();
     }
 
@@ -40,8 +38,7 @@ class SalaryRate extends Model
     */
     public static function getUsersWithoutSalaryRate()
     {
-        $developer = Developer::getCurrentDeveloper();
-    	return User::selectRaw(DB::raw('CONCAT(users.last_name,", ",users.first_name) as full_name, users.id, salary_rates.user_id'))
+        return User::selectRaw(DB::raw('CONCAT(users.last_name,", ",users.first_name) as full_name, users.id, salary_rates.user_id'))
     	->leftJoin('salary_rates','users.id','=','salary_rates.user_id')
     	->whereRaw(DB::raw('(users.user_type_id = '.config('constants.USER_TYPE_ADMIN').
             ' or users.user_type_id = '.config('constants.USER_TYPE_DEVELOPER_ADMIN').
@@ -50,7 +47,7 @@ class SalaryRate extends Model
             ' or users.user_type_id = '.config('constants.USER_TYPE_DEVELOPER_EMPLOYEE').
             ' or users.user_type_id = '.config('constants.USER_TYPE_DEVELOPER_CONSTRUCTION').
             ' or users.user_type_id = '.config('constants.USER_TYPE_DEVELOPER_GUARD').
-            ') and (salary_rates.user_id is NULL and users.developer_id = '.$developer->id.')'))
+            ') and (salary_rates.user_id is NULL)'))
     	->lists('full_name', 'id');
     }
 
@@ -60,10 +57,9 @@ class SalaryRate extends Model
     */
     public static function getUsersSalaryRateForList(SalaryRate $salary_rate)
     {
-        $developer = Developer::getCurrentDeveloper();
         return User::selectRaw(DB::raw('CONCAT(users.last_name,", ",users.first_name," ",users.middle_name) as full_name, users.id, salary_rates.user_id'))
         ->leftJoin('salary_rates','users.id','=','salary_rates.user_id')
-        ->whereRaw(DB::raw('salary_rates.user_id = '.$salary_rate->user_id.' and users.developer_id = '.$developer->id))
+        ->whereRaw(DB::raw('salary_rates.user_id = '.$salary_rate->user_id))
         ->lists('full_name', 'id');
     }
 
@@ -127,14 +123,12 @@ class SalaryRate extends Model
     {
         $working_hours = config('constants.HOURS_OF_WORKING');
 
-        $developer = Developer::getCurrentDeveloper();
         return SalaryRate::selectRaw(DB::raw('(salary_rates.rate / '.$working_hours.') 
             as hourly_rate, salary_rates.rate, users.id as user_id, CONCAT(users.last_name,", ",users.first_name) as employee_name'))
             ->leftJoin('users','users.id','=','salary_rates.user_id')
-            ->whereRaw(DB::raw('users.developer_id = '.$developer->id.'
-            and (users.user_type_id = '.config('constants.USER_TYPE_DEVELOPER_SECRETARY').
+            ->whereRaw(DB::raw('users.user_type_id = '.config('constants.USER_TYPE_DEVELOPER_SECRETARY').
             ' or users.user_type_id = '.config('constants.USER_TYPE_DEVELOPER_ACCOUNTANT').
-            ' or users.user_type_id = '.config('constants.USER_TYPE_DEVELOPER_EMPLOYEE').')'))
+            ' or users.user_type_id = '.config('constants.USER_TYPE_DEVELOPER_EMPLOYEE')))
             ->get();
     }
 
@@ -147,12 +141,10 @@ class SalaryRate extends Model
     {
         $working_hours = config('constants.HOURS_OF_WORKING');
 
-        $developer = Developer::getCurrentDeveloper();
         return SalaryRate::selectRaw(DB::raw('(salary_rates.rate / '.$working_hours.') 
             as hourly_rate, salary_rates.rate, users.id as user_id, CONCAT(users.last_name,", ",users.first_name) as employee_name'))
             ->leftJoin('users','users.id','=','salary_rates.user_id')
-            ->whereRaw(DB::raw('users.developer_id = '.$developer->id.'
-            and (users.user_type_id = '.config('constants.USER_TYPE_DEVELOPER_CONSTRUCTION').')'))
+            ->whereRaw(DB::raw('users.user_type_id = '.config('constants.USER_TYPE_DEVELOPER_CONSTRUCTION')))
             ->get();
     }
 
@@ -165,12 +157,10 @@ class SalaryRate extends Model
     {
         $working_hours = config('constants.HOURS_OF_WORKING');
 
-        $developer = Developer::getCurrentDeveloper();
         return SalaryRate::selectRaw(DB::raw('(salary_rates.rate / '.$working_hours.') 
             as hourly_rate, salary_rates.rate, users.id as user_id, CONCAT(users.last_name,", ",users.first_name) as employee_name'))
             ->leftJoin('users','users.id','=','salary_rates.user_id')
-            ->whereRaw(DB::raw('users.developer_id = '.$developer->id.'
-            and (users.user_type_id = '.config('constants.USER_TYPE_DEVELOPER_GUARD').')'))
+            ->whereRaw(DB::raw('users.user_type_id = '.config('constants.USER_TYPE_DEVELOPER_GUARD')))
             ->get();
     }
 
@@ -183,7 +173,6 @@ class SalaryRate extends Model
     {
         $working_hours = config('constants.HOURS_OF_WORKING');
 
-        $developer = Developer::getCurrentDeveloper();
         return SalaryRate::selectRaw(DB::raw('(salary_rates.rate / '.$working_hours.') 
             as hourly_rate, salary_rates.rate, users.id as user_id, CONCAT(users.last_name,", ",users.first_name) as employee_name'))
             ->leftJoin('users','users.id','=','salary_rates.user_id')
@@ -292,8 +281,7 @@ class SalaryRate extends Model
 
         $counter = true;
         $row_counter = 1;
-        $developer = Developer::getCurrentDeveloper();
-
+        
         
         foreach($data as $datum) {
             if($datum->last_name != null and $datum->first_name != null and $datum->rate != null) {

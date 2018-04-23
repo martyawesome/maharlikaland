@@ -27,9 +27,16 @@
           <td>{{ $ledger_detail->ma_covered_date }}</td>
           <td>{{ $ledger_detail->or_no }}</td>
           <td>{{ number_format($ledger_detail->amount_paid, 2, '.', ',') }}</td>
-          <td>{{ number_format($ledger_detail->interest, 2, '.', ',') }}</td>
-          <td>{{ number_format($ledger_detail->principal, 2, '.', ',') }}</td>
-          <td>{{ number_format($ledger_detail->balance, 2, '.', ',') }}</td>
+          @if($ledger_detail->payment_type_id == config('constants.PAYMENT_TYPE_DOWNPAYMENT') or
+          $ledger_detail->payment_type_id == config('constants.PAYMENT_TYPE_RESERVATION_FEE'))
+            <td></td>
+            <td></td>
+            <td></td>
+          @else
+            <td>{{ number_format($ledger_detail->interest, 2, '.', ',') }}</td>
+            <td>{{ number_format($ledger_detail->principal, 2, '.', ',') }}</td>
+            <td>{{ number_format($ledger_detail->balance, 2, '.', ',') }}</td>
+          @endif
           <td>{{ number_format($ledger_detail->penalty, 2, '.', ',') }}</td>
           <td>{{ $ledger_detail->remarks }}</td>
           <td>

@@ -438,10 +438,10 @@ class InstallmentAccountLedgerDetail extends Model
     public static function getLastBalance(InstallmentAccountLedger $ledger)
     {
         $latest_balance = InstallmentAccountLedgerDetail::whereInstallmentAccountLedgerId($ledger->id)
-        ->where('balance','>=','0')
-        ->whereRaw('balance >= 0 and (payment_type_id = '.config('constants.PAYMENT_TYPE_MA').' or '.config('constants.PAYMENT_TYPE_PENALTY_PAYMENT').')')
-        ->orderBy('id', 'desc')->first();
-
+        ->whereRaw('payment_type_id = '.config('constants.PAYMENT_TYPE_MA').' or payment_type_id = '.config('constants.PAYMENT_TYPE_PENALTY_PAYMENT'))
+        ->orderBy('id', 'desc')
+        ->first();
+        
         if($latest_balance != null){
             return $latest_balance->balance;
         } else {

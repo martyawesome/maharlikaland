@@ -22,7 +22,9 @@ use App\Amenity;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-
+use DB;
+use Auth;
+use File;
 
 class Project extends Model
 {
@@ -41,7 +43,6 @@ class Project extends Model
         ->join('provinces','project_locations.province_id','=','provinces.id')
         ->join('cities_municipalities','project_locations.city_municipality_id','=','cities_municipalities.id')
         ->select(DB::raw('projects.*, provinces.name as province, cities_municipalities.name as city_municipality'))
-        ->whereDeveloperId(Developer::whereId(Auth::user()->developer_id)->first()->id)
         ->get();
     }
 
@@ -87,7 +88,6 @@ class Project extends Model
             $project->is_active = false;
     	
         $project->agent_id = Auth::user()->agent_id;
-    	$project->developer_id = Auth::user()->developer_id;
         
         if($request->file('logo')) {
             $imagePath = public_path() .'/'.config('constants.PROJECTS_IMAGES_PATH').Str::slug($request->get('name')).'/main/';

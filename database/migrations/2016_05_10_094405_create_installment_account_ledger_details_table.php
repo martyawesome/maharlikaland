@@ -26,6 +26,7 @@ class CreateInstallmentAccountLedgerDetailsTable extends Migration
             $table->double('balance')->nullable();
             $table->string('remarks')->nullable();
             $table->double('penalty')->nullable();
+            $table->integer('uploader_id');
             $table->timestamps();
         });*/
     }

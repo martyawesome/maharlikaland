@@ -35,7 +35,7 @@
       @if((Auth::user()->user_type_id == config('constants.USER_TYPE_ADMIN') 
               or Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ADMIN')) and !$has_ledger and
       $property->property_type_id == config('constants.PROPERTY_TYPE_LOT'))
-        {!! link_to_route('property_show_split', 'Split', array($project->slug,$property->slug), ['class' => 'btn btn-warning', 'style' => 'margin-right:5px;']) !!} 
+        {!! link_to_route('show_split', 'Split', array($project->slug,$property->slug), ['class' => 'btn btn-warning', 'style' => 'margin-right:5px;']) !!} 
       @endif
 
       @if(Auth::user()->user_type_id == config('constants.USER_TYPE_ADMIN') 

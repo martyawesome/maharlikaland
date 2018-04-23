@@ -75,7 +75,7 @@ class PropertiesController extends Controller
         $cities_municipalities = CityMunicipality::get();
         $buyers = Buyer::getBuyersForForm($property);
         $buyers->prepend('None', 0);
-        $agents = User::getAllForForm($developer->id);
+        $agents = User::getAllForForm();
         $agents->prepend('None', 0);
         $joint_ventures = JointVenture::getListForProject($project);
         $joint_ventures->prepend('None', 0);

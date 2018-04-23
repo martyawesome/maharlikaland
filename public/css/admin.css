@@ -59,8 +59,7 @@
 }
 
 .project-list-photo-container {
-	max-height: 250px;
-	overflow: hidden;
+	padding: 25px;
 }
 
 .project-list-main-photo {

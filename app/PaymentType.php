@@ -25,7 +25,6 @@ class PaymentType extends Model
     {
         $total_reservation_fee = InstallmentAccountLedgerDetail::whereRaw('installment_account_ledger_id = '
             .$ledger->id.' and payment_type_id = '.config('constants.PAYMENT_TYPE_RESERVATION_FEE'))->sum('amount_paid');
-
         $total_downpayment = InstallmentAccountLedgerDetail::whereRaw('installment_account_ledger_id = '
             .$ledger->id.' and payment_type_id = '.config('constants.PAYMENT_TYPE_DOWNPAYMENT'))->sum('amount_paid');
 
@@ -34,9 +33,9 @@ class PaymentType extends Model
 
         $balance = InstallmentAccountLedgerDetail::getLastBalance($ledger);  
 
-        if($ledger->bank_finance) {
-            if($total_reservation_fee < $ledger->reservation_fee and $total_downpayment < 
-                $ledger->dp - $ledger->reservation_fee - $ledger->dp_discount){
+        if($ledger->bank_finance > 0) {
+            // and $total_downpayment < $ledger->dp - $ledger->reservation_fee - $ledger->dp_discount
+            if($total_reservation_fee < $ledger->reservation_fee ){
                 return config('constants.PAYMENT_TYPE_RESERVATION_FEE');
             }
             else if($total_downpayment + $total_reservation_fee < $ledger->dp - $ledger->dp_discount) {
@@ -46,14 +45,17 @@ class PaymentType extends Model
             }
         } else {
             // Buyer started to pay the monthly amorization and is not equal to the balance
-            if($balance > 0 and $total_downpayment + $total_reservation_fee >= $ledger->dp){
+            if($balance > 0 and ($total_downpayment + $total_reservation_fee) >= $ledger->dp){
+
                 return config('constants.PAYMENT_TYPE_MA'); 
             }
             else if(round($balance,2) == 0){
+
                 return config('constants.PAYMENT_TYPE_FULL_PAYMENT'); 
             }
             // Buyer has not yet paid the reservation fee
-            else if($total_reservation_fee < $ledger->reservation_fee) {
+            else if($total_reservation_fee <= $ledger->reservation_fee) {
+
                 // Buyer is not yet paying for the MA and the DP and reservation fee is less than the required
                 if(($total_downpayment + $total_reservation_fee) < $ledger->dp - $ledger->dp_discount) {
                     return config('constants.PAYMENT_TYPE_DOWNPAYMENT');
@@ -61,6 +63,7 @@ class PaymentType extends Model
                     return config('constants.PAYMENT_TYPE_RESERVATION_FEE');
                 }
             } else {
+
                 return null;
             }
         }
@@ -75,7 +78,7 @@ class PaymentType extends Model
         $remaning_penalty = round(InstallmentAccountLedgerDetail::getRemainingPenalty($ledger),2);
     	if(PaymentType::getCurrentPayment($ledger) == config('constants.PAYMENT_TYPE_RESERVATION_FEE') or 
             PaymentType::getCurrentPayment($ledger) == config('constants.PAYMENT_TYPE_DOWNPAYMENT')) {
-             return PaymentType::whereRaw(DB::raw('id = '.config('constants.PAYMENT_TYPE_RESERVATION_FEE').' or id = '.config('constants.PAYMENT_TYPE_DOWNPAYMENT') ))->lists('payment_type','id');
+            return PaymentType::whereRaw(DB::raw('id = '.config('constants.PAYMENT_TYPE_RESERVATION_FEE').' or id = '.config('constants.PAYMENT_TYPE_DOWNPAYMENT') ))->lists('payment_type','id');
     	} 
     	// Buyer has not payed all the MA
     	else if(PaymentType::getCurrentPayment($ledger) == config('constants.PAYMENT_TYPE_MA')) {

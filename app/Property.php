@@ -13,7 +13,6 @@ use Illuminate\Support\Str;
 use App\InstallmentAccountLedger;
 use App\User;
 use App\Agent;
-use App\Developer;
 use App\Project;
 use Auth;
 use DB;
@@ -90,19 +89,17 @@ class Property extends Model
             $property->project_id = $project->id;
         }
 
-        $property->developer_id = Auth::user()->developer_id;
         $property->agent_id = Auth::user()->agent_id;
         
     	$property->name = $request->get('name');
     	$property->slug = Str::slug($request->get('name'));
 
-        if($request->get('is_active') and $request->get('is_active') == "yes")
-            $property->is_active = true;
-        else
-            $property->is_active = false;
-
     	$property->property_type_id = $request->get('property_type');
-    	$property->floor_id = $request->get('floors');
+        if($request->get('property_type') == config('constants.PROPERTY_TYPE_LOT')){
+            $property->floor_id = 0;
+        } else {
+    	   $property->floor_id = $request->get('floors');
+        }
     	$property->number_of_bedrooms_id = $request->get('number_of_bedrooms');
     	$property->number_of_bathrooms_id = $request->get('number_of_bathrooms');
     	if($request->get('floor_area'))
@@ -188,15 +185,19 @@ class Property extends Model
         $property->name = $request->get('name');
         $property->slug = Str::slug($request->get('name'));
 
-        if($request->get('is_active') and $request->get('is_active') == "yes")
-            $property->is_active = true;
-        else
-            $property->is_active = false;
-
         $property->property_type_id = $request->get('property_type');
-        $property->floor_id = $request->get('floors');
-        $property->number_of_bedrooms_id = $request->get('number_of_bedrooms');
-        $property->number_of_bathrooms_id = $request->get('number_of_bathrooms');
+        if($request->get('property_type') == config('constants.PROPERTY_TYPE_LOT')){
+            $property->floor_id = 0;
+            $property->parking_availability_id = 0;
+            $property->number_of_bedrooms_id = 0;
+            $property->number_of_bathrooms_id = 0;
+        } else {
+            $property->floor_id = $request->get('floors');
+            $property->parking_availability_id = $request->get('parking_availability');
+            $property->number_of_bedrooms_id = $request->get('number_of_bedrooms');
+            $property->number_of_bathrooms_id = $request->get('number_of_bathrooms');
+        }
+        
         if($request->get('floor_area'))
             $property->floor_area = str_replace(',','',$request->get('floor_area'));
         if($request->get('lot_area'))
@@ -205,7 +206,7 @@ class Property extends Model
             $property->is_furnished = true;
         else
             $property->is_furnished = false;
-        $property->parking_availability_id = $request->get('parking_availability');
+
         $property->price = str_replace(',','',$request->get('price'));
         $property->price_per_sqm = str_replace(',','',$request->get('price_per_sqm'));
         $property->property_status_id = $request->get('property_status');
@@ -311,7 +312,6 @@ class Property extends Model
                 $property->property_status_id = config('constants.PROPERTY_STATUS_FOR_SALE');
                 $property->name = $request->get('name') . " Block " . ($i+1) . " Lot " . ($j+1);
                 $property->slug = Str::slug($property->name);
-                $property->developer_id = Auth::user()->developer_id;
                 $property->main_picture_path = config('constants.PROPERTIES_DEFAULT_IMAGE_PATH');
                 
                 if($property->touch()) {
@@ -414,8 +414,8 @@ class Property extends Model
             {
                 $query->select(DB::raw(1))
                       ->from('installment_account_ledger')
-                      ->whereRaw('installment_account_ledger.property_id = properties.id and installment_account_ledger.buyer_id = '.$buyer->id);
-            })->whereRaw("buyer_id = 0")->lists('name','id');
+                      ->whereRaw('installment_account_ledger.property_id = properties.id');
+            })->whereRaw("buyer_id != 0")->lists('name','id');
     }
 
 
@@ -426,12 +426,10 @@ class Property extends Model
     public static function getForBuyers(Buyer $buyer)
     {
         if($buyer->id != null) {
-            return Property::whereRaw('properties.developer_id = '.Auth::user()->developer_id.' and
-                (properties.buyer_id = '.$buyer->id.' or properties.buyer_id IS NULL)')
+            return Property::whereRaw('properties.buyer_id = '.$buyer->id.' or properties.buyer_id IS NULL')
             ->lists('name', 'id');
         } else {
-            return Property::whereRaw('properties.developer_id = '.Auth::user()->developer_id.' and 
-                properties.buyer_id IS NULL or properties.buyer_id = 0')
+            return Property::whereRaw('properties.buyer_id IS NULL or properties.buyer_id = 0')
             ->lists('name', 'id');
         }
     }
@@ -442,8 +440,7 @@ class Property extends Model
     */
     public static function getForProspectBuyers(ProspectBuyer $buyer)
     {
-        return Property::whereRaw('properties.developer_id = '.Auth::user()->developer_id.' and 
-            properties.buyer_id IS NULL')->lists('name', 'id');
+        return Property::whereRaw('properties.buyer_id IS NULL or properties.buyer_id = 0')->lists('name', 'id');
     }
 
     /**
@@ -483,10 +480,8 @@ class Property extends Model
             $new_property = new Property();
             $new_property->property_type_id = $property->property_type_id;
             $new_property->project_id = $project->id;
-            $new_property->is_active = true;
             $new_property->lot_area = $lots_lot_area[$i];
             $new_property->property_status_id = $property->property_status_id;
-            $new_property->developer_id = Auth::user()->developer_id;
             $new_property->main_picture_path = config('constants.PROPERTIES_DEFAULT_IMAGE_PATH');
             $new_property->joint_venture_id = $property->joint_venture_id;
             $new_property->buyer_id = $property->buyer_id;

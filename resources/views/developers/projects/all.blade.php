@@ -18,7 +18,7 @@
               <li style="list-style:none;">
                 <div class="box box-success">
                     <div class="project-list-photo-container">
-                      <img class="img-responsive" src="<?php echo asset("").$project->logo_path?>" >
+                      <img class="img-responsive" src="<?php echo asset("").$project->banner_path?>" >
                     </div>
                     <div class="project-list-text-overlay">
                       <h1>{{ $project->name }}</h1>

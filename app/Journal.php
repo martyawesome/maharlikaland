@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use App\Http\Requests\AddEditJournalRequest;
 
 use App\User;
-use App\Developer;
 
 use DB;
 use Auth;
@@ -27,12 +26,10 @@ class Journal extends Model
     */
     public static function getAll()
     {
-        $developer = Developer::getCurrentDeveloper();
         return Journal::selectRaw(DB::raw("journal_types.type, journals.id ,journals.date, journals.date,
-                         journals.entry, users.developer_id, users.id, CONCAT(users.first_name,' ',users.middle_name,' ',users.last_name) as user_name"))
+                         journals.entry, , users.id, CONCAT(users.first_name,' ',users.middle_name,' ',users.last_name) as user_name"))
                         ->leftJoin('journal_types','journals.journal_type_id','=','journal_types.id')
                         ->leftJoin('users','journals.user_id','=','users.id')
-                        ->whereRaw(DB::raw('users.developer_id = '.$developer->id))
                         ->get();
     }
 
@@ -55,7 +52,6 @@ class Journal extends Model
     */
     public static function getJournalsOnDayCurrentUser($date)
     {
-    	$developer = Developer::getCurrentDeveloper();
     	return Journal::selectRaw(DB::raw('journal_types.type, journals.id ,journals.date, journals.date, journals.entry'))
 				    	->leftJoin('journal_types','journals.journal_type_id','=','journal_types.id')
 				    	->whereRaw(DB::raw('journals.date = "'.$date.'" and journals.user_id = '.Auth::user()->id))
@@ -99,7 +95,6 @@ class Journal extends Model
     {
         DB::beginTransaction();
 
-        $developer = Developer::getCurrentDeveloper();
         try {
             $return['success'] = Journal::find($journal->id)->delete();
 

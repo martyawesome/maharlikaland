@@ -218,7 +218,7 @@ class BillWaterSource extends Model
     	return Excel::create($project->name, function($excel) use ($project) {
             $excel->setTitle($project->name);
 
-            $developer = Developer::find(Auth::user()->developer_id);
+            $developer = Developer::getCurrentDeveloper();
             $excel->setCompany($developer->name);
 
             $excel->setDescription("Water bills for ".$project->name);
@@ -257,7 +257,7 @@ class BillWaterSource extends Model
         return Excel::create($project->name, function($excel) use ($project) {
             $excel->setTitle($project->name);
 
-            $developer = Developer::find(Auth::user()->developer_id);
+            $developer = Developer::getCurrentDeveloper();
             $excel->setCompany($developer->name);
 
             $excel->setDescription("Water bills for ".$project->name);

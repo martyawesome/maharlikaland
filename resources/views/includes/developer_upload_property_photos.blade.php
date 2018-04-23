@@ -61,6 +61,7 @@
   var token = "{{ Session::getToken() }}";
   var errors = false;
   var errorResponse = "";
+  Dropzone.autoDiscover = false;
   var myDropzone = new Dropzone("div#dropzoneFileUpload", { 
     paramName: "file",
     maxFilesize: 15,
@@ -69,7 +70,7 @@
     parallelUploads: 1000,
     dictRemoveFile: 'Remove',
     dictFileTooBig: 'Image is bigger than 15MB',
-    url: "{{ url('/') }}/manage/developers/projects/{{ $project->slug }}/{{ $property->slug }}/upload_photos",
+    url: "{{ url('/') }}/manage/projects/{{ $project->slug }}/{{ $property->slug }}/upload_photos",
     params: {
       _token: token
     },

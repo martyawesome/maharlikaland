@@ -21,8 +21,7 @@ class PayrollDeductionType extends Model
     */
     public static function getAll()
     {
-    	$developer = Developer::getCurrentDeveloper();
-    	return PayrollDeductionType::whereDeveloperId($developer->id)->lists('type','id');
+    	return PayrollDeductionType::lists('type','id');
     }
 
 

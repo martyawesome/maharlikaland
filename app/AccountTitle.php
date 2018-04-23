@@ -27,7 +27,7 @@ class AccountTitle extends Model
     */
     public static function getAll()
     {
-    	return AccountTitle::whereDeveloperId(Auth::user()->developer_id)->get();
+    	return AccountTitle::get();
     }
 
     /**
@@ -36,7 +36,7 @@ class AccountTitle extends Model
     */
     public static function getAllForForm()
     {
-        return AccountTitle::whereDeveloperId(Auth::user()->developer_id)->lists('title','id');
+        return AccountTitle::lists('title','id');
     }
 
     /**
@@ -47,7 +47,6 @@ class AccountTitle extends Model
     {
     	DB::beginTransaction();
 
-    	$account_title->developer_id = Auth::user()->developer_id;
     	$account_title->title = $request->get('account_title');
     	$account_title->slug = Str::slug($request->get('account_title'));
 

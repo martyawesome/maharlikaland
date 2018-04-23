@@ -95,7 +95,7 @@ class InstallmentAccountLedger extends Model
             }
             $ledger->bank_finance_mo_interest = $mo_interest;
             
-            if($ledger->bank_finance){
+            if($ledger->bank_finance and $ledger->bank_finance < $ledger->balance){
                 $factor = $mo_interest/(1-(pow((1+$mo_interest), (-1 * $ledger->bank_finance_months))));
                 $ledger->bank_finance_monthly = $ledger->bank_finance_diff * $factor;
             }
@@ -175,7 +175,7 @@ class InstallmentAccountLedger extends Model
                         $ledger_detail->payment_type_id = config('constants.PAYMENT_TYPE_BANK_FINANCE_PAYMENT');
                     }
 
-                    $ledger_detail->ma_covered_date = $datum->ma_covered;
+                    $ledger_detail->ma_covered_date = $datum->ma_covered == null ? "" : $datum->ma_covered;
                     $ledger_detail->or_no = $datum->or_no;
                     $ledger_detail->amount_paid = str_replace(',','',$datum->amount);
                     $ledger_detail->interest = str_replace(',','',$datum->interest);
@@ -224,7 +224,7 @@ class InstallmentAccountLedger extends Model
     public static function formatLedgerToExport(Buyer $buyer, InstallmentAccountLedger $ledger)
     {
         $property = Property::find($ledger->property_id);
-        $developer = Developer::find(Auth::user()->developer_id);
+        $developer = Developer::getCurrentDeveloper();
         return Excel::create($property->name, function($excel) use ($buyer, $ledger, $property, $developer) {
             $excel->setTitle($property->name);
             $excel->setCompany($developer->name);

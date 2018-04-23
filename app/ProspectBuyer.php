@@ -24,7 +24,7 @@ class ProspectBuyer extends Model
     */
     public static function getByDeveloper()
     {
-    	return ProspectBuyer::whereDeveloperId(Auth::user()->developer_id)->get();
+    	return ProspectBuyer::getCurrentDeveloper()->get();
     }
 
     /**
@@ -43,7 +43,6 @@ class ProspectBuyer extends Model
         	$prospect_buyer->contact_number = $request->get('contact_number');
         	$prospect_buyer->email = $request->get('email');
         	$prospect_buyer->agent_id = Auth::user()->agent_id;
-        	$prospect_buyer->developer_id = Auth::user()->developer_id;
         	$return["success"] = $prospect_buyer->touch();
 
             $return_prospect_property = ProspectProperty::updateProspectProperty($prospect_buyer, $request);

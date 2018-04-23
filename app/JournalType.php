@@ -6,7 +6,6 @@ use App\Http\Requests\AddEditJournalTypeRequest;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Developer;
 
 use DB;
 
@@ -25,9 +24,7 @@ class JournalType extends Model
     */
     public static function getJournalTypes()
     {
-    	$developer = Developer::getCurrentDeveloper();
-    	return JournalType::whereDeveloperId($developer->id)
-        ->orderBy('type','asc')
+    	return JournalType::orderBy('type','asc')
         ->get();
     }
 
@@ -37,9 +34,7 @@ class JournalType extends Model
     */
     public static function getJournalTypesList()
     {
-        $developer = Developer::getCurrentDeveloper();
-        return JournalType::whereDeveloperId($developer->id)
-        ->orderBy('type','asc')
+        return JournalType::orderBy('type','asc')
         ->lists('type','id');
     }
 
@@ -51,10 +46,8 @@ class JournalType extends Model
     {
     	DB::beginTransaction();
 
-    	$developer = Developer::getCurrentDeveloper();
     	try {
     		$journal_type->type = $request->get('type');
-    		$journal_type->developer_id = $developer->id;
 
     		$return['success'] = $journal_type->touch();
 
@@ -79,7 +72,6 @@ class JournalType extends Model
     {
     	DB::beginTransaction();
 
-    	$developer = Developer::getCurrentDeveloper();
     	try {
     		$return['success'] = JournalType::find($journal_type->id)->delete();
 

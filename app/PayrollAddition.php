@@ -24,11 +24,9 @@ class PayrollAddition extends Model
     */
     public static function getAll()
     {
-    	$developer = Developer::getCurrentDeveloper();
     	return PayrollAddition::selectRaw('users.first_name, users.middle_name, users.last_name, payroll_additions.*, payroll_addition_types.type')
     	->leftJoin('users','users.id','=','payroll_additions.user_id')
     	->leftJoin('payroll_addition_types','payroll_addition_types.id','=','payroll_additions.payroll_addition_type_id')
-    	->whereRaw(DB::raw('users.developer_id = '.$developer->id))
     	->get();
     }
 

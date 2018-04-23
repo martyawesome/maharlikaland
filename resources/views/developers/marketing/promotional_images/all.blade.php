@@ -16,7 +16,7 @@
     or Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_SECRETARY'))
       <div class="box box-primary">
         <div class="box-body">
-          <a href="{{ route('upload_promotional_images') }}" class="btn btn-success" style="margin-right: 5px;">Upload</a>
+          <a href="{{ route('promotional_images_projects') }}" class="btn btn-success" style="margin-right: 5px;">Upload</a>
           @if(count($promotional_images) > 0)
             <a href="{{ route('show_delete_promotional_images') }}" class="btn btn-danger">Delete</a>
           @endif

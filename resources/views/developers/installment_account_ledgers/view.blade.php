@@ -18,10 +18,10 @@
       @if(Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ADMIN') 
               or Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_SECRETARY'))
         {!! link_to_route('edit_ledger', 'Edit', array($buyer->id, $ledger->id), ['class' => 'btn btn-primary', 'style' => 'margin-right:5px;']) !!}
-        <input type="button" class="btn btn-success" id="import_ledger_button" value="Import from Excel" style="margin-right:5px;"></input>
         @if($payment_types != null)
           {!! link_to_route('add_ledger_entry', 'Add Entry', array($buyer->id, $ledger->id), ['class' => 'btn btn-warning', 'style' => 'margin-right:5px;']) !!}
         @endif
+        <input type="button" class="btn btn-success" id="import_ledger_button" value="Import from Excel" style="margin-right:5px;"></input>
       @endif
 
       {!! link_to_route('export_ledger_to_excel', 'Export to Excel', array($buyer->id, $ledger->id), ['class' => 'btn btn-success', 'style' => 'margin-right:5px;']) !!}

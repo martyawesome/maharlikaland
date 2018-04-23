@@ -53,14 +53,14 @@
 			{!! Form::label('property_status', 'Property Status'); !!}
 			{!! Form::select('property_status', $property_statuses, $property->property_status_id, ['class' => 'form-control']) !!}
 		</div>
-		<div class="checkbox icheck">
+		<!-- <div class="checkbox icheck">
 			@if($property->id)
 				{!! Form::checkbox('is_active',"yes",$property->is_active) !!}
 			@else
 				{!! Form::checkbox('is_active',"yes",1) !!}
 			@endif
 			&nbsp;&nbsp;Is Active
-		</div>
+		</div> -->
 	</div>
 </div>
 

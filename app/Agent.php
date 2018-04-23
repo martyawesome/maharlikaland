@@ -185,7 +185,6 @@ class Agent extends Model
 
         $counter = true;
         $row_counter = 1;
-        $developer = Developer::getCurrentDeveloper();
         
         foreach($data as $datum) {
             if($datum->last_name != null and $datum->first_name != null and $datum->user_type != null) {
@@ -204,9 +203,6 @@ class Agent extends Model
                     $user->contact_number = $datum->contact_number;
                     $user->email = $datum->email;
                     $user->user_type_id = $datum->user_type;
-                    if($developer){
-                        $user->developer_id = $developer->id;
-                    }
                     $user->username = ucwords(trim(str_replace(' ', '', str_replace('Ñ', 'n', str_replace('ñ', 'n', strtolower($datum->last_name)))))).str_replace('-','', $datum->birthdate);
                     $user->profile_picture_path = 'img/defaults/icon-user-default.png';
                     $user->password = Hash::make('12345');

@@ -19,7 +19,6 @@ class PayrollAdditionType extends Model
     */
     public static function getAll()
     {
-    	$developer = Developer::getCurrentDeveloper();
-    	return PayrollAdditionType::whereDeveloperId($developer->id)->lists('type','id');
+    	return PayrollAdditionType::lists('type','id');
     }
 }

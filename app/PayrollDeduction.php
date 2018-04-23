@@ -24,11 +24,9 @@ class PayrollDeduction extends Model
     */
     public static function getAll()
     {
-    	$developer = Developer::getCurrentDeveloper();
     	return PayrollDeduction::selectRaw('users.first_name, users.middle_name, users.last_name, payroll_deductions.*, payroll_deduction_types.type')
     	->leftJoin('users','users.id','=','payroll_deductions.user_id')
     	->leftJoin('payroll_deduction_types','payroll_deduction_types.id','=','payroll_deductions.payroll_deduction_type_id')
-    	->whereRaw(DB::raw('users.developer_id = '.$developer->id))
     	->get();
     }
 

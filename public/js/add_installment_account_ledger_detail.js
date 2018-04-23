@@ -31,8 +31,12 @@ function paymentTypeOnChange()
 {
 	var payment_type = $('#payment_type option:selected').val();
 	if(payment_type == ma) {
+        $('#details_of_payment_container').show();
     	$('#ma_covered_date_container').show();
     	$('#with_interest_container').show();
+        $('#or_no_container').show();
+        $('#amount_paid_container').show();
+        $('#payment_date_container').show();
     } else if(payment_type == penalty_fee){
         $('#ma_covered_date_container').show();
         $('#with_interest_container').show();
@@ -44,6 +48,7 @@ function paymentTypeOnChange()
         $('#payment_date_container').show();
     	$('#ma_covered_date_container').hide();
     	$('#with_interest_container').hide();
+        $('#or_no_container').show();
         $('#amount_paid_container').hide();
     } else if(payment_type == bank_finance_payment) {
         $('#amount_paid_container').show();

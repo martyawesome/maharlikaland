@@ -27,10 +27,9 @@ class PromotionalMaterial extends Model
 	*/
     public static function getAllPromotionalImages()
     {
-    	$developer = Developer::getCurrentDeveloper();
     	return PromotionalMaterial::selectRaw(DB::raw('projects.name as project_name, promotional_materials.*'))
-    	->leftJoin('projects','projects.developer_id','=','promotional_materials.project_id')
-    	->whereRaw('projects.developer_id ='.$developer->id.' and promotional_materials.media_type_id = '.config('constants.MEDIA_TYPE_IMAGE'))
+    	->leftJoin('projects','projects.id','=','promotional_materials.project_id')
+    	->whereRaw('promotional_materials.media_type_id = '.config('constants.MEDIA_TYPE_IMAGE'))
     	->get();
     }
 
@@ -120,10 +119,9 @@ class PromotionalMaterial extends Model
 	*/
     public static function getAllPromotionalVideos()
     {
-    	$developer = Developer::getCurrentDeveloper();
     	return PromotionalMaterial::selectRaw(DB::raw('projects.name as project_name, promotional_materials.*'))
-    	->leftJoin('projects','projects.developer_id','=','promotional_materials.project_id')
-    	->whereRaw('projects.developer_id ='.$developer->id.' and promotional_materials.media_type_id = '.config('constants.MEDIA_TYPE_VIDEO'))
+    	->leftJoin('projects','projects.id','=','promotional_materials.project_id')
+    	->whereRaw('promotional_materials.media_type_id = '.config('constants.MEDIA_TYPE_VIDEO'))
     	->get();
     }
 

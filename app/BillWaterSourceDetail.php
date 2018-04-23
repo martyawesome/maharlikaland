@@ -167,7 +167,7 @@ class BillWaterSourceDetail extends Model
         return Excel::create($water_bill->date_covered.' '.$project->name, function($excel) use ($project, $water_bill) {
             $excel->setTitle($water_bill->date_covered.' '.$project->name);
 
-            $developer = Developer::find(Auth::user()->developer_id);
+            $developer = Developer::getCurrentDeveloper();
             $excel->setCompany($developer->name);
 
             $excel->setDescription("Water bills for ".$project->name.' '.$water_bill->date_covered);
@@ -212,7 +212,7 @@ class BillWaterSourceDetail extends Model
         return Excel::create($water_bill->date_covered.' '.$project->name, function($excel) use ($project, $water_bill) {
             $excel->setTitle($water_bill->date_covered.' '.$project->name);
 
-            $developer = Developer::find(Auth::user()->developer_id);
+            $developer = Developer::getCurrentDeveloper();
             $excel->setCompany($developer->name);
 
             $excel->setDescription("Water bills for ".$project->name.' '.$water_bill->date_covered);
@@ -259,13 +259,11 @@ class BillWaterSourceDetail extends Model
     */
     public static function getUnpaidBills(Project $project)
     {
-        $developer = Developer::getCurrentDeveloper();
         return BillWaterSourceDetail::selectRaw(DB::raw("sum(bills_water_source_details.bill) - sum(bills_water_source_details.payment) as amount, properties.name as property, CONCAT(buyers.first_name,' ',buyers.middle_name,' ',buyers.last_name) as buyer"))  
                 ->leftJoin('bills_water_source','bills_water_source_details.bills_water_source_id','=','bills_water_source.id')
                 ->leftJoin('projects','projects.id','=','bills_water_source.project_id')
                 ->leftJoin('properties','properties.id','=','bills_water_source_details.property_id')
                 ->leftJoin('buyers','buyers.id','=','properties.buyer_id')
-                ->whereRaw('projects.developer_id = 1')
                 ->groupBy('bills_water_source_details.property_id')
                 ->havingRaw('amount > 0')
                 ->get(); 

@@ -26,7 +26,6 @@ class DeveloperAgent extends Model
     		$return["success"] = 3;
     	} else {
     		$developer_agent = new DeveloperAgent();
-    		$developer_agent->developer_id = $developer_id;
     		$developer_agent->user_id = $user_id;
     		if($developer_agent->touch()) {
     			$return["success"] = 1;
@@ -47,7 +46,6 @@ class DeveloperAgent extends Model
     	return DeveloperAgent::selectRaw(DB::raw('developers_agents.id, users.first_name, users.last_name, users.id as user_id, users.address, users.contact_number, users.email, user_types.user_type'))
             ->leftJoin('users','users.id','=','developers_agents.user_id')
             ->leftJoin('user_types','user_types.id','=','users.user_type_id')
-            ->whereRaw(DB::raw('developers_agents.developer_id = '.$developer->id))
             ->get(); 
     }
 

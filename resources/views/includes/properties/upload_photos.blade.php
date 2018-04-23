@@ -61,6 +61,7 @@
   var token = "{{ Session::getToken() }}";
   var errors = false;
   var errorResponse = "";
+  Dropzone.autoDiscover = false;
   var myDropzone = new Dropzone("div#dropzoneFileUpload", { 
     paramName: "file",
     maxFilesize: 15,

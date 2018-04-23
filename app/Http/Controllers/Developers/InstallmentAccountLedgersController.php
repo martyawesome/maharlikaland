@@ -64,7 +64,7 @@ class InstallmentAccountLedgersController extends Controller
         $restructure_allowed = true;
         $add = true;
         $developer = Developer::getCurrentDeveloper();
-        $penalty_types = PenaltyType::whereDeveloperId($developer->id)->lists('type','id');
+        $penalty_types = PenaltyType::lists('type','id');
         return view('developers.installment_account_ledgers.add', compact('buyer','property','properties',
             'ledger','restructure_allowed', 'add','penalty_types'));
     }

@@ -29,7 +29,7 @@ class Buyer extends Model
     */
     public static function getByDeveloper()
     {
-    	return Buyer::whereDeveloperId(Auth::user()->developer_id)->get();
+    	return Buyer::get();
     }
 
     /**
@@ -50,12 +50,12 @@ class Buyer extends Model
     	if(Auth::user()->user_type_id == config('constants.AGENT_TYPE_DEVELOPER')) {
 			return Buyer::leftJoin('properties','properties.buyer_id','=','buyers.id')
 			->select('buyers.*')
-			->whereRaw('buyers.developer_id = '.Auth::user()->developer_id.' and properties.buyer_id IS NULL')
+			->whereRaw('properties.buyer_id IS NULL')
 			->get();
 		} else {
 			return Buyer::leftJoin('properties','properties.buyer_id','=','buyers.id')
 			->select('buyers.*')
-			->whereRaw('buyers.developer_id = '.Auth::user()->agent_id.' and properties.buyer_id IS NULL')
+			->whereRaw('properties.buyer_id IS NULL')
 			->get();
 		}
     }
@@ -66,41 +66,20 @@ class Buyer extends Model
     */
     public static function getBuyersForForm(Property $property)
     {
-    	if(!$property->buyer_id) {
-    		if(Auth::user()->user_type_id == config('constants.USER_TYPE_ADMIN') or
-                Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER') or
-                Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ADMIN') or
-                 Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_SECRETARY') or 
-                  Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ACCOUNTANT')) {
-				return Buyer::leftJoin('properties','properties.buyer_id','=','buyers.id')
-				->select( DB::raw("(concat(buyers.first_name,' ',buyers.last_name)) AS full_name, buyers.id"))
-				->whereRaw('buyers.developer_id = '.Auth::user()->developer_id.' 
-					and properties.buyer_id IS NULL or properties.buyer_id')
-				->lists('full_name', 'id');
-			} else {
-				return Buyer::leftJoin('properties','properties.buyer_id','=','buyers.id')
-				->select( DB::raw("(concat(buyers.first_name,' ', buyers.middle_name,' ',buyers.last_name)) AS full_name, buyers.id"))
-				->whereRaw('buyers.agent_id = '.Auth::user()->agent_id.' 
-					and properties.buyer_id IS NULL or properties.buyer_id')
-				->lists('full_name', 'id');
-			}
-	    } else {
-	    	if(Auth::user()->user_type_id == config('constants.USER_TYPE_ADMIN') or
-                Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER') or
-                Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ADMIN') or
-                 Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_SECRETARY') or 
-                  Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ACCOUNTANT')) {
-                return Buyer::leftJoin('properties','properties.buyer_id','=','buyers.id')
-				->select( DB::raw("(concat(buyers.first_name,' ', buyers.middle_name,' ',buyers.last_name)) as full_name, buyers.id"))
-				->whereRaw('buyers.developer_id = '.Auth::user()->developer_id)
-				->lists('full_name', 'id');
-			} else {
-				return Buyer::leftJoin('properties','properties.buyer_id','=','buyers.id')
-				->select( DB::raw("(concat(buyers.first_name,' ', buyers.middle_name,' ',buyers.last_name)) AS full_name, buyers.id"))
-				->whereRaw('buyers.agent_id = '.Auth::user()->agent_id.' 
-					and properties.buyer_id IS NULL or properties.buyer_id = '. $property->buyer_id)
-				->lists('full_name', 'id');
-			}
+    	if(Auth::user()->user_type_id == config('constants.USER_TYPE_ADMIN') or
+            Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER') or
+            Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ADMIN') or
+             Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_SECRETARY') or 
+              Auth::user()->user_type_id == config('constants.USER_TYPE_DEVELOPER_ACCOUNTANT')) {
+            return Buyer::leftJoin('properties','properties.buyer_id','=','buyers.id')
+			->select( DB::raw("(concat(COALESCE(buyers.last_name,''),', ', COALESCE(buyers.first_name,''),' ',COALESCE(buyers.middle_name,''))) as full_name, buyers.id"))
+			->lists('full_name', 'id');
+		} else {
+			return Buyer::leftJoin('properties','properties.buyer_id','=','buyers.id')
+			->select( DB::raw("(concat(buyers.first_name,' ', buyers.middle_name,' ',buyers.last_name)) AS full_name, buyers.id"))
+			->whereRaw('buyers.agent_id = '.Auth::user()->agent_id.' 
+				and properties.buyer_id IS NULL or properties.buyer_id = '. $property->buyer_id)
+			->lists('full_name', 'id');
 		}
     }
 
@@ -247,7 +226,6 @@ class Buyer extends Model
 
         $counter = true;
         $row_counter = 1;
-        $developer = Developer::getCurrentDeveloper();
         
         foreach($data as $datum) {
             if($datum->last_name != null and $datum->first_name != null) {
@@ -274,10 +252,6 @@ class Buyer extends Model
                     $buyer->company_address = $datum->company_address;
                     $buyer->position = $datum->position;
 
-                    if($developer){
-                        $buyer->developer_id = $developer->id;
-                    }
-
                     if($buyer->touch()){
                         $user = User::whereBuyerId($buyer->id)->first();
 
@@ -290,7 +264,6 @@ class Buyer extends Model
                             $user->user_type_id = config('constants.USER_TYPE_BUYER');
                             $user->able_to_sell = false;
                             $user->is_mobile_activated = true;
-                            $user->developer_id = $buyer->developer_id;
                             $user->profile_picture_path = 'img/defaults/icon-user-default.png';
                         }
 
@@ -347,7 +320,6 @@ class Buyer extends Model
     */
     public static function getByWholeName($first_name, $middle_name, $last_name)
     {
-        $developer = Developer::getCurrentDeveloper();
-        return Buyer::whereRaw("first_name like '%".$first_name."%' and middle_name like '%".$middle_name."%' and last_name like '%".$last_name."%' and developer_id = ".$developer->id)->first();
+        return Buyer::whereRaw("first_name like '%".$first_name."%' and middle_name like '%".$middle_name."%' and last_name like '%".$last_name."%'")->first();
     }
 }

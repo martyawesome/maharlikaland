@@ -177,7 +177,7 @@ Route::bind('promotional_materials', function($photoIds) {
 	$ids = json_decode(base64_decode($photoIds));
 	for ($i = 0; $i < count($ids); $i++) {
 		$promotional_materials[$i] = App\PromotionalMaterial::selectRaw(DB::raw('projects.name as project_name, projects.slug as project_slug, promotional_materials.*'))
-    	->leftJoin('projects','projects.developer_id','=','promotional_materials.project_id')
+    	->leftJoin('projects','projects.id','=','promotional_materials.project_id')
 		->whereRaw(DB::raw('promotional_materials.id = '.$ids[$i]))->first();
 	}
 	return $promotional_materials;
