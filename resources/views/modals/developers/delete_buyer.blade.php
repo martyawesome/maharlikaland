@@ -9,7 +9,7 @@
     $("#submit-security-code-button").click(function(){
          $.ajax({
             type: "POST",
-            url: "{{ url('/') }}/manage/developers/buyer/{{$buyer->id}}/delete",
+            url: "{{ url('/') }}/manage/buyer/{{$buyer->id}}/delete",
             data: {
               security_code : $('#security_code').val()
             },

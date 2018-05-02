@@ -47,7 +47,7 @@ class AddPropertyRequest extends Request
         }
         // Lot  
         else if ($this->property_type == '4') {
-            $rules['lot_number'] = 'required|integer';
+            $rules['lot_number'] = 'required';
             $rules['block_number'] = 'required|integer';
         }
         // Condominium Unit  

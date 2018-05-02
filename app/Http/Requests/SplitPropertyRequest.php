@@ -28,7 +28,7 @@ class SplitPropertyRequest extends Request
         ];
 
         for($i = 0; $i < $this->lots; $i++) {
-            $rules['lots_lot_area.'.$i] = 'required|integer';
+            $rules['lots_lot_area.'.$i] = config('constants.REQUEST_NUMERIC_REQUIRED');
         }
 
         return $rules;

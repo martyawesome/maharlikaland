@@ -406,7 +406,7 @@ class InstallmentAccountLedger extends Model
         ->leftJoin('projects','projects.id','=','properties.project_id')
         ->leftJoin('buyers','buyers.id','=','installment_account_ledger.buyer_id')
         ->select(DB::raw('properties.name as property, properties.slug as property_slug, projects.name as project, projects.slug as project_slug, installment_account_ledger.*'))
-        ->whereRaw(DB::raw('installment_account_ledger.due_date = '.$current_day.' and ((IFNULL(total_amount_paid,0) > 0 and installment_account_ledger.balance > IFNULL(total_amount_paid,0)) or (IFNULL(total_reservation,0) + IFNULL(total_dp,0) >= installment_account_ledger.dp))'))
+        ->whereRaw(DB::raw('installment_account_ledger.due_date = '.$current_day.' and ((IFNULL(total_amount_paid,0) > 0 and installment_account_ledger.balance > IFNULL(total_amount_paid,0)) or (IFNULL(total_reservation,0) + IFNULL(total_dp,0) >= installment_account_ledger.dp)) and properties.property_status_id != '.config('constants.PROPERTY_STATUS_FULLY_PAID')))
         ->get();
     }
 

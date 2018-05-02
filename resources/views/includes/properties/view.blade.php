@@ -117,7 +117,7 @@
       @for($i = 0; $i < count($floor_areas); $i++)
         <div class="control-group">
           <label class="control-label">Floor {{$floor_areas[$i]->floor}} - Floor Area (sqm)</label>
-          <div class="controls readonly">{{ number_format($floor_areas[$i]->floor_area) }}</div>
+          <div class="controls readonly">{{ number_format($floor_areas[$i]->floor_area, 2) }}</div>
         </div>
       @endfor
     </div>
@@ -129,13 +129,13 @@
     @if($property->lot_area)
       <div class="control-group">
         <label class="control-label">Lot Area (sqm)</label>
-        <div class="controls readonly">{{ number_format($property->lot_area) }}</div>
+        <div class="controls readonly">{{ number_format($property->lot_area, 2) }}</div>
       </div>
     @endif
     @if($property->floor_area)
       <div class="control-group">
         <label class="control-label">Floor Area (sqm)</label>
-        <div class="controls readonly">{{ number_format($property->floor_area) }}</div>
+        <div class="controls readonly">{{ number_format($property->floor_area, 2) }}</div>
       </div>
     @endif
     @if($property->bedrooms)

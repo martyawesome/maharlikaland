@@ -27,7 +27,7 @@ class Journal extends Model
     public static function getAll()
     {
         return Journal::selectRaw(DB::raw("journal_types.type, journals.id ,journals.date, journals.date,
-                         journals.entry, , users.id, CONCAT(users.first_name,' ',users.middle_name,' ',users.last_name) as user_name"))
+                         journals.entry, users.id, CONCAT(COALESCE(users.first_name),' ',COALESCE(users.middle_name),' ',COALESCE(users.last_name)) as user_name"))
                         ->leftJoin('journal_types','journals.journal_type_id','=','journal_types.id')
                         ->leftJoin('users','journals.user_id','=','users.id')
                         ->get();
