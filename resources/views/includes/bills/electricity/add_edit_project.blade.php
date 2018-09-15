@@ -7,17 +7,17 @@
     </div>
     <div class="form-group{{ $errors->has('consumption') ? ' has-error' : '' }}">
       {!! Form::label('consumption', 'Consumption (kWh)*'); !!}
-      {!! Form::text('consumption', $water_bill->consumption, ['class' => 'form-control']) !!}
+      {!! Form::text('consumption', $electricity_bill->consumption, ['class' => 'form-control']) !!}
       {!! $errors->first('consumption', '<span class="help-block">:message</span>') !!}
     </div>
     <div class="form-group{{ $errors->has('bill') ? ' has-error' : '' }}">
       {!! Form::label('bill', 'Bill Amount*'); !!}
-      {!! Form::text('bill', $water_bill->bill, ['class' => 'form-control']) !!}
+      {!! Form::text('bill', $electricity_bill->bill, ['class' => 'form-control']) !!}
       {!! $errors->first('bill', '<span class="help-block">:message</span>') !!}
     </div>
     <div class="form-group">
       {!! Form::label('remarks', 'Remarks'); !!}
-      {!! Form::textarea('remarks', $water_bill->remarks, ['class' => 'form-control', 'rows' => '3']); !!}
+      {!! Form::textarea('remarks', $electricity_bill->remarks, ['class' => 'form-control', 'rows' => '3']); !!}
     </div>
   </div> 
 </div>

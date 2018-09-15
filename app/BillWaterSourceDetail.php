@@ -24,7 +24,7 @@ class BillWaterSourceDetail extends Model
     * Get all of the properties' bills of a project water bill.
     *
     */
-    public static function getAllByProjectBillWater(BillWaterSource $water_bill)
+    public static function getAllByProjectBill(BillWaterSource $water_bill)
     {
         return BillWaterSourceDetail::select(DB::raw('bills_water_source_details.* , properties.name as property, properties.slug as property_slug, properties.id'))
     		->leftJoin('properties','properties.id','=','bills_water_source_details.property_id')

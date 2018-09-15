@@ -392,7 +392,10 @@ class Property extends Model
     */
     public static function getPropertiesOfBuyer(Buyer $buyer)
     {
-        return Property::whereBuyerId($buyer->id)->get();
+        return Property::join('projects','projects.id','=','properties.project_id')
+        ->select(DB::raw('properties.name as property_name, properties.slug as property_slug, projects.slug as project_slug'))
+        ->whereRaw('properties.buyer_id = ' . $buyer->id)
+        ->get();
     }
 
     /**

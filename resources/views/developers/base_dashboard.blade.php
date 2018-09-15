@@ -181,7 +181,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <li class="treeview">
               <a href="#"><i class="fa fa-lightbulb-o"></i> <span>Billings</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
-                <!--<li><a href="{{ URL::route('bills_electricity_project') }}"><i class="fa fa-flash"></i>Electricity</a></li>-->
+                <li><a href="{{ URL::route('bills_electricity_projects') }}"><i class="fa fa-flash"></i>Electricity</a></li>
                 <li><a href="{{ URL::route('bills_water_projects') }}"><i class="fa fa-tint"></i>Water</a></li>
               </ul>
             </li>

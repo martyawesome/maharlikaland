@@ -73,7 +73,7 @@ class BillsWaterSourceController extends Controller
     public function showProjectBill(Project $project, BillWaterSource $water_bill)
     {	
         $water_bill = BillWaterSource::getDetailedBill($water_bill);
-    	$water_bill_details = BillWaterSourceDetail::getAllByProjectBillWater($water_bill);
+    	$water_bill_details = BillWaterSourceDetail::getAllByProjectBill($water_bill);
         return view('developers.bills.water.projects.view', compact('project','water_bill','water_bill_details'));
     }
 

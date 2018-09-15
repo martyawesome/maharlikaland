@@ -663,7 +663,7 @@ class InstallmentAccountLedgerDetail extends Model
         ->leftJoin('properties','properties.id','=','installment_account_ledger.property_id')
         ->leftJoin('payment_types','payment_types.id','=','installment_account_ledger_details.payment_type_id')
         ->selectRaw('installment_account_ledger_details.*, properties.name as property, installment_account_ledger.*, payment_types.payment_type')
-        ->orderBy('installment_account_ledger_details.updated_at','desc')
+        ->orderBy('installment_account_ledger_details.payment_date','desc')
         ->whereRaw('installment_account_ledger_details.payment_type_id != '. config('constants.PAYMENT_TYPE_PENALTY_FEE'))
         ->take(10)
         ->get();

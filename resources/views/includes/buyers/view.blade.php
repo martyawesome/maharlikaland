@@ -11,7 +11,11 @@
           <div class="controls readonly">None</div>
         @else
           @foreach($properties as $property)
-            <div class="controls readonly">{{ $property->name }}</div>
+            <div class="controls readonly">
+              <a href="{{ URL::route('property',array($property->project_slug,$property->property_slug)) }}">
+                {{ $property->property_name }}
+              </a>
+            </div>
           @endforeach
         @endif
       </div>
