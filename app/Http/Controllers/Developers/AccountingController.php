@@ -26,7 +26,7 @@ class AccountingController extends Controller
     *
     */
     public function showAccountTitles() {
-        $account_titles = AccountTitle::getAll();
+        $account_titles = AccountTitle::orderBy('title')->get();
         return view('developers.accounting.account_titles.all', compact('account_titles'));
     }
 

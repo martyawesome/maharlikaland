@@ -14,6 +14,9 @@
   <section class="content">
     @include('modals.success')
     <div class="list-group">
+      <div class="box-footer" style="margin-bottom: 15px;">
+        {!! link_to_route('add_account_title', 'Add', array(), ['class' => 'btn btn-success', 'style' => 'margin-right:5px;']) !!}
+      </div>
       @if(count($account_titles) > 0)
         <div class="box box-default">
           <div class="box-body">
@@ -27,9 +30,6 @@
       @else
         <p>No account titles found</p>
       @endif
-      <div class="box-footer">
-        {!! link_to_route('add_account_title', 'Add', array(), ['class' => 'btn btn-success', 'style' => 'margin-right:5px;']) !!}
-      </div>
     </div>
   </section>
 @stop
