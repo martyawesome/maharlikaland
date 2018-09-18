@@ -73,9 +73,9 @@ class AccountingController extends Controller
         $return = AccountTitle::updateAccountTitle($account_title, $request);
 
         if($return["success"]){
-            return redirect(route('account_titles', array()))->withSuccess('Account title <i>'.$request->get('account_title').'</i> was successfully added');
+            return redirect(route('account_titles', array()))->withSuccess('Account title <i>'.$request->get('account_title').'</i> was successfully edited');
         } else {
-            return redirect(route('account_titles', array()))->withDanger('Account title for <i>'.$request->get('account_title').'</i> was unsuccessfully added');
+            return redirect(route('account_titles', array()))->withDanger('Account title for <i>'.$request->get('account_title').'</i> was unsuccessfully edited');
         }
     }
 
