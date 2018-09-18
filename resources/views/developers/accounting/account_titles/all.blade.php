@@ -17,19 +17,45 @@
       <div class="box-footer" style="margin-bottom: 15px;">
         {!! link_to_route('add_account_title', 'Add', array(), ['class' => 'btn btn-success', 'style' => 'margin-right:5px;']) !!}
       </div>
-      @if(count($account_titles) > 0)
-        <div class="box box-default">
-          <div class="box-body">
-            @foreach($account_titles as $account_title)
-              <a href="{{ URL::route('edit_account_title',array($account_title->slug)) }}" class="list-group-item">
-                {{ $account_title->title }}
-              </a>
-            @endforeach
-          </div>
+      <div class="box box-default">
+        <div class="box-body">
+          @if(count($account_titles) > 0)
+            <table id="objects" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($account_titles as $account_title)
+                  <tr class='clickable-row' style="cursor: pointer;" data-href="{{ URL::route('edit_account_title', $account_title->slug) }}">
+                    <td>
+                      {{ $account_title->title }}
+                    </td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          @else
+            <p>No account titles found</p>
+          @endif
         </div>
-      @else
-        <p>No account titles found</p>
-      @endif
+      </div>
     </div>
   </section>
+  <script>
+    $(function () {
+      $('#objects').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true
+      });
+    });
+    $(".clickable-row").click(function() {
+        window.document.location = $(this).data("href");
+    });
+  </script>
 @stop

@@ -22,22 +22,22 @@
         <div class="box">
           <div class="box-body">
             @if(count($journal_types) > 0)
-            <table id="objects" class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($journal_types as $journal_type)
-                  <tr class='clickable-row' style="cursor: pointer;" data-href="{{ URL::route('edit_journal_type', $journal_type->id) }}">
-                    <td>
-                      {{ $journal_type->type }}
-                    </td>
+              <table id="objects" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Details</th>
                   </tr>
-                @endforeach
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  @foreach($journal_types as $journal_type)
+                    <tr class='clickable-row' style="cursor: pointer;" data-href="{{ URL::route('edit_journal_type', $journal_type->id) }}">
+                      <td>
+                        {{ $journal_type->type }}
+                      </td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
             @else
               No journal types found
             @endif
