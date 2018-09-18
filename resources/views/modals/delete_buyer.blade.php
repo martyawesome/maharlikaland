@@ -17,7 +17,7 @@
     $("#final-submit-button").click(function(){
         $.ajax({
             type: "POST",
-            url: "{{ url('/') }}/manage/developers/prospect_buyer/{{$prospect_buyer->id}}/delete",
+            url: "{{ url('/') }}/developers/prospect_buyer/{{$prospect_buyer->id}}/delete",
             data: {
               security_code : $('#security_code').val()
             },

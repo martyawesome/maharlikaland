@@ -296,7 +296,7 @@ class BillWaterSource extends Model
     {
         DB::beginTransaction();
 
-        $water_bill_details_deleted = BillWaterSourceDetail::deleteForImporting($project, $water_bill->zdate_covered);
+        $water_bill_details_deleted = BillWaterSourceDetail::deleteForImporting($project, $water_bill->date_covered);
         $water_bill_deleted = BillWaterSource::whereId($water_bill->id)->delete();
 
         if($water_bill_details_deleted and $water_bill_deleted) {

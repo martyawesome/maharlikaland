@@ -50,6 +50,8 @@ class BaseController extends Controller
         $user->touch();*/
         
         $developer = Developer::getCurrentDeveloper();
+        //$developer->security_code = Hash::make('123maharlika123');
+        //$developer->touch();
         return view('developers.dashboard', compact('developer','ledgers_due_date_today','voucher_details','ledger_details',
             'birthdays'));
     }

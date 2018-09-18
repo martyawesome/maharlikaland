@@ -9,7 +9,7 @@
     $("#submit-security-code-button").click(function(){
          $.ajax({
             type: "POST",
-            url: "{{ url('/') }}/manage/bills/electricity/{{ $project->slug }}/{{ $electricity_bill->date_covered }}/delete",
+            url: "{{ url('/') }}/bills/electricity/{{ $project->slug }}/{{ $electricity_bill->date_covered }}/delete",
             data: {
               security_code : $('#security_code').val()
             },
