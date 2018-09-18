@@ -52,7 +52,7 @@ class ProspectBuyersController extends Controller
     */
     public function showProspectBuyers()
     {
-        $prospect_buyers = ProspectBuyer::getByDeveloper();
+        $prospect_buyers = ProspectBuyer::all();
         return view('developers.prospect_buyers.all', compact('prospect_buyers'));
     }
 

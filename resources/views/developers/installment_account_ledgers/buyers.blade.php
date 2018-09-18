@@ -28,19 +28,22 @@
               </thead>
               <tbody>
                 @foreach($buyers as $buyer)
+                  <!-- For creation of a new ledger -->
                   @if($type == 1)
                     <tr class='clickable-row' style="cursor: pointer;" data-href="{{ URL::route('new_ledger',array($buyer->id)) }}">
+                  <!-- For selecting of existing ledgers -->
                   @elseif($type == 2)
                     <tr class='clickable-row' style="cursor: pointer;" data-href="{{ URL::route('ledger_properties',array($buyer->id)) }}">
                   @endif
+                  
                       <td>
-                          <b>{{ $buyer->first_name }} {{ $buyer->last_name }}</b>
-                        </td>
-                        <td>
-                            {{ $buyer->home_address }} </br>
-                            {{ $buyer->contact_number_mobile }} </br>
-                            {{ $buyer->email }}
-                        </td>
+                        <b>{{ $buyer->first_name }} {{ $buyer->last_name }}</b>
+                      </td>
+                      <td>
+                          {{ $buyer->home_address }} </br>
+                          {{ $buyer->contact_number_mobile }} </br>
+                          {{ $buyer->email }}
+                      </td>
                     </tr>
                 @endforeach
               </tbody>
