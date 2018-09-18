@@ -295,7 +295,7 @@ class BillElectricitySource extends Model
     {
         DB::beginTransaction();
 
-        $electricity_bill_details_deleted = BillElectricitySourceDetail::deleteForImporting($project, $electricity_bill->zdate_covered);
+        $electricity_bill_details_deleted = BillElectricitySourceDetail::deleteForImporting($project, $electricity_bill->date_covered);
         $electricity_bill_deleted = BillElectricitySource::whereId($electricity_bill->id)->delete();
 
         if($electricity_bill_details_deleted and $electricity_bill_deleted) {
