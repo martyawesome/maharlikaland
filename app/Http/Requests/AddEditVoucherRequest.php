@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use App\Voucher;
 
 class AddEditVoucherRequest extends Request
 {
@@ -23,6 +24,8 @@ class AddEditVoucherRequest extends Request
      */
     public function rules()
     {
+        $this->voucher = $this->voucher == null ? new Voucher() : $this->voucher;
+
         return [
             'date' => 'required|date',
             'payee' => 'required',

@@ -3,7 +3,6 @@
   <section class="content-header">
     <h1>
       New Voucher
-      <small><b><a href="{{ URL::route('vouchers', array($project->slug)) }}">{{ $project->name }}</a></b></small>
     </h1>
     <ol class="breadcrumb">
       <li>Accounting</li>

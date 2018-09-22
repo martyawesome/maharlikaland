@@ -112,9 +112,9 @@ class AccountingController extends Controller
     * List all of the vouchers.
     *
     */
-    public function showVouchers(Project $project)
+    public function showVouchers()
     {
-        $vouchers = Voucher::getAll($project);
+        $vouchers = Voucher::getAll();
         return view('developers.accounting.vouchers.all', compact('vouchers'));
     }
 
@@ -122,24 +122,24 @@ class AccountingController extends Controller
     * Show the form for adding a voucher.
     *
     */
-    public function showAddVoucher(Project $project)
+    public function showAddVoucher()
     {
         $voucher = new Voucher();
-        return view('developers.accounting.vouchers.add', compact('project','voucher'));
+        return view('developers.accounting.vouchers.add', compact('voucher'));
     }
 
     /**
-    * Add a voucher for a project.
+    * Add a voucher.
     *
     */
-    public function addVoucher(Project $project, AddEditVoucherRequest $request)
+    public function addVoucher(AddEditVoucherRequest $request)
     {
-        $return = Voucher::updateVoucher($project, new Voucher(), $request);
+        $return = Voucher::updateVoucher(new Voucher(), $request);
 
         if($return["success"]){
-            return redirect(route('vouchers', array($project->slug)))->withSuccess('Voucher for <i>'.$project->name.'</i> was successfully added');
+            return redirect(route('vouchers'))->withSuccess('Voucher was successfully added');
         } else {
-            return redirect(route('vouchers', array($project->slug)))->withDanger('Voucher for <i>'.$project->name.'</i> was unsuccessfully added');
+            return redirect(route('vouchers'))->withDanger('Voucher was unsuccessfully added');
         }
     }
 
@@ -147,13 +147,13 @@ class AccountingController extends Controller
     * Show the form for editing a voucher.
     *
     */
-    public function showEditVoucher(Project $project, Voucher $voucher)
+    public function showEditVoucher(Voucher $voucher)
     {
-        return view('developers.accounting.vouchers.edit', compact('project','voucher'));
+        return view('developers.accounting.vouchers.edit', compact('voucher'));
     }
 
     /**
-    * Edit a voucher of a project.
+    * Edit a voucher.
     *
     */
     public function editVoucher(Voucher $voucher, AddEditVoucherRequest $request)
@@ -171,18 +171,18 @@ class AccountingController extends Controller
     * Show the voucher and its particulars
     *
     */
-    public function showVoucher(Project $project, Voucher $voucher)
+    public function showVoucher(Voucher $voucher)
     {
         $voucher_amount  = VoucherDetail::getTotalAmount($voucher);
         $voucher_details = VoucherDetail::getAll($voucher);
-        return view('developers.accounting.vouchers.view', compact('project','voucher','voucher_amount','voucher_details'));
+        return view('developers.accounting.vouchers.view', compact('voucher','voucher_amount','voucher_details'));
     }
 
     /**
     * Delete a projet's a voucher and voucher details.
     *
     */
-    public function deleteVoucher(Project $project, Voucher $voucher, Request $request)
+    public function deleteVoucher(Voucher $voucher, Request $request)
     {
         $developer = Developer::getCurrentDeveloper();
         if(Hash::check($request['security_code'],$developer->security_code)) {
@@ -201,27 +201,27 @@ class AccountingController extends Controller
     * Show the form for adding a voucher detail.
     *
     */
-    public function showAddVoucherDetail(Project $project, Voucher $voucher)
+    public function showAddVoucherDetail(Voucher $voucher)
     {
         $voucher_detail = new VoucherDetail();
         $account_titles = AccountTitle::getAllForForm();
-        $properties = Property::whereProjectId($project->id)->lists('name', 'id');
+        $properties = Property::lists('name', 'id');
         $properties->prepend('None');
-        return view('developers.accounting.voucher_details.add', compact('project','voucher','voucher_detail','account_titles','properties'));
+        return view('developers.accounting.voucher_details.add', compact('voucher','voucher_detail','account_titles','properties'));
     }
 
     /**
     * Add a voucher detail.
     *
     */
-    public function addVoucherDetail(Project $project, Voucher $voucher, AddEditVoucherDetailRequest $request)
+    public function addVoucherDetail(Voucher $voucher, AddEditVoucherDetailRequest $request)
     {
         $return = VoucherDetail::updateVoucherDetail($voucher, new VoucherDetail(), $request);
 
         if($return["success"]){
-            return redirect(route('voucher', array($project->slug, $voucher->voucher_number)))->withSuccess('Particular for voucher number <i>'.$voucher->voucher_number.'</i> was successfully added');
+            return redirect(route('voucher', $voucher->voucher_number))->withSuccess('Particular for voucher number <i>'.$voucher->voucher_number.'</i> was successfully added');
         } else {
-            return redirect(route('voucher', array($project->slug, $voucher->voucher_number)))->withDanger('Particular for voucher number <i>'.$voucher->voucher_number.'</i> was unsuccessfully added');
+            return redirect(route('voucher', $voucher->voucher_number))->withDanger('Particular for voucher number <i>'.$voucher->voucher_number.'</i> was unsuccessfully added');
         }
     }
 
@@ -229,26 +229,26 @@ class AccountingController extends Controller
     * Edit a voucher detail.
     *
     */
-    public function showEditVoucherDetail(Project $project, Voucher $voucher, VoucherDetail $voucher_detail)
+    public function showEditVoucherDetail(Voucher $voucher, VoucherDetail $voucher_detail)
     {
         $account_titles = AccountTitle::getAllForForm();
-        $properties = Property::whereProjectId($project->id)->lists('name', 'id');
+        $properties = Property::lists('name', 'id');
         $properties->prepend('None');
-        return view('developers.accounting.voucher_details.edit', compact('project','voucher','voucher_detail','account_titles','properties'));
+        return view('developers.accounting.voucher_details.edit', compact('voucher','voucher_detail','account_titles','properties'));
     }
 
     /**
     * Edit a voucher detail.
     *
     */
-    public function editVoucherDetail(Project $project, Voucher $voucher, VoucherDetail $voucher_detail, AddEditVoucherDetailRequest $request)
+    public function editVoucherDetail(Voucher $voucher, VoucherDetail $voucher_detail, AddEditVoucherDetailRequest $request)
     {
         $return = VoucherDetail::updateVoucherDetail($voucher, $voucher_detail, $request);
 
         if($return["success"]){
-            return redirect(route('voucher', array($project->slug, $voucher->voucher_number)))->withSuccess('Particular for voucher number <i>'.$voucher->voucher_number.'</i> was successfully added');
+            return redirect(route('voucher', array($voucher->voucher_number)))->withSuccess('Particular for voucher number <i>'.$voucher->voucher_number.'</i> was successfully added');
         } else {
-            return redirect(route('voucher', array($project->slug, $voucher->voucher_number)))->withDanger('Particular for voucher number <i>'.$voucher->voucher_number.'</i> was unsuccessfully added');
+            return redirect(route('voucher', array($voucher->voucher_number)))->withDanger('Particular for voucher number <i>'.$voucher->voucher_number.'</i> was unsuccessfully added');
         }
     }
 
@@ -256,7 +256,7 @@ class AccountingController extends Controller
     * Delete voucher details.
     *
     */
-    public function deleteVoucherDetail(Project $project, Voucher $voucher, VoucherDetail $voucher_detail, Request $request)
+    public function deleteVoucherDetail(Voucher $voucher, VoucherDetail $voucher_detail, Request $request)
     {
         $developer = Developer::getCurrentDeveloper();
         if(Hash::check($request['security_code'],$developer->security_code)) {
